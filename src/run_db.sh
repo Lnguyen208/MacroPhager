@@ -1,0 +1,1 @@
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=DBS2024macro!" -p 1433:1433 --name MacroPhagerDB --hostname MacroPhagerDB -d mcr.microsoft.com/mssql/server:latest

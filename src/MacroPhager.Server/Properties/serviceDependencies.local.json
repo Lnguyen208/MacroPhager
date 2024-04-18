@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "serviceConnectorResourceId": "",
+      "containerPorts": "1433:1433",
+      "secretStore": "LocalSecretsFile",
+      "containerName": "MacroPhagerDB",
+      "containerImage": "mcr.microsoft.com/mssql/server:latest",
+      "resourceId": null,
+      "type": "mssql.container",
+      "connectionId": "MacroPhagerDB"
+    },
+    "secrets1": {
+      "secretStore": null,
+      "resourceId": null,
+      "type": "secrets.user",
+      "connectionId": null
+    }
+  }
+}
