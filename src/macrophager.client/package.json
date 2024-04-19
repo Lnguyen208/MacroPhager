@@ -13,11 +13,17 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/material": "^5.15.15",
     "dexie": "^4.0.4",
     "dexie-react-hooks": "^1.1.7",
     "framer-motion": "^11.1.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-circular-progressbar": "^2.1.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
+    "recharts": "^2.12.5",
+    "sass": "^1.75.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
