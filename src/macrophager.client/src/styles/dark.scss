@@ -1,0 +1,80 @@
+.App.dark {
+    background-color: #222;
+    color: rgb(156, 156, 156);
+
+    .chart-grid {
+        stroke: rgba(228, 228, 228, 0.219);
+    }
+
+    .Table {
+        background-color: #222;
+
+        .tableCell {
+            color: gray;
+        }
+    }
+
+    .Navbar {
+        background-color: #222;
+        color: #999;
+        border-bottom: 0.5px solid #333;
+
+        .search {
+            border: 0.5px solid #333;
+        }
+    }
+
+    .Sidebar {
+        background-color: #222;
+        border-color: #333;
+
+        .top {
+            .logo {
+                color: #999;
+            }
+        }
+
+        hr {
+            border-color: #333;
+        }
+
+        ul {
+            li {
+                &:hover {
+                    background-color: #333;
+                }
+
+                .icon {
+                    color: #999;
+                }
+            }
+        }
+
+        .bottom {
+            .colorOption {
+                border: 1px solid #444;
+            }
+        }
+    }
+
+    .DataTable {
+        .css-n3fyjk-MuiDataGrid-root .MuiDataGrid-container--top [role=row], .css-n3fyjk-MuiDataGrid-root .MuiDataGrid-container--bottom [role=row] {
+            background: #222;
+        }
+
+        .datagridtable {
+            color: gray;
+            border: none;
+
+            .column {
+                &.super-app-theme--header {
+                    background-color: gray;
+                }
+            }
+
+            .viewButton, .deleteButton, .cellwithstatus {
+                color: gray;
+            }
+        }
+    }
+}
