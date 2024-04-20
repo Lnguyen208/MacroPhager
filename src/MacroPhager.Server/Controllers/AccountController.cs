@@ -29,7 +29,6 @@ namespace MacroPhager.Server.Controllers
                 user_id = Guid.NewGuid().ToString(),
                 first_name = registration.first_name,
                 last_name = registration.last_name,
-                display_name = registration.display_name,
                 macro_goal = registration.macro_goal,
                 tdee = registration.tdee,
             };

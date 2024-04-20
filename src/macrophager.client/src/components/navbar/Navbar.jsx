@@ -2,12 +2,12 @@ import './Navbar.scss';
 import SearchIcon from '@mui/icons-material/Search';
 import LanguageIcon from '@mui/icons-material/Language';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ChecklistIcon from '@mui/icons-material/Checklist';
 import { DarkModeContext } from '../../context/darkModeContext';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const { darkMode, dispatch } = useContext(DarkModeContext);
@@ -28,9 +28,6 @@ const Navbar = () => {
                         <DarkModeIcon className='icon' onClick={() => dispatch({ type: 'TOGGLE' })}></DarkModeIcon>
                     </div>
                     <div className='item'>
-                        <FullscreenExitIcon className='icon'></FullscreenExitIcon>
-                    </div>
-                    <div className='item'>
                         <NotificationsIcon className='icon'></NotificationsIcon>
                         <div className='counter'>1</div>
                     </div>
@@ -38,12 +35,11 @@ const Navbar = () => {
                         <ChatBubbleOutlineIcon className='icon'></ChatBubbleOutlineIcon>
                         <div className='counter'>2</div>
                     </div>
-                    <div className='item'>
-                        <ChecklistIcon className='icon'></ChecklistIcon>
-                    </div>
-                    <div className='item'>
-                        <img src='https://pets-society.com/wp-content/uploads/2023/02/orange-tabby-cat-ginger-847x1024.jpg' alt='' className='avatar'></img>
-                    </div>
+                    <Link to='/users/12345' style={{ textDecoration: 'none' }}>
+                        <div className='item'>
+                            <img src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt='' className='avatar'></img>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>

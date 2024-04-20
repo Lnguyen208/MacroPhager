@@ -1,9 +1,9 @@
 import './Sidebar.scss';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import PersonIcon from '@mui/icons-material/Person';
+import DiningIcon from '@mui/icons-material/Dining';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import EventNoteIcon from '@mui/icons-material/EventNote';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ForumIcon from '@mui/icons-material/Forum';
@@ -32,52 +32,39 @@ const Sidebar = () => {
                         </li>
                     </Link>
 
-                    <p className='title'>LISTS</p>
+                    <p className='title'>ACTIONS</p>
                     <Link to='/users' style={{ textDecoration: 'none' }}>
                         <li>
-                            <PersonIcon className='icon'></PersonIcon>
-                            <span>Users</span>
+                            <DiningIcon className='icon'></DiningIcon>
+                            <span>Food Log</span>
                         </li>
                     </Link>
                     <Link to='/products' style={{ textDecoration: 'none' }}>
                         <li>
                             <SupervisedUserCircleIcon className='icon'></SupervisedUserCircleIcon>
-                            <span>Products</span>
+                            <span>My Friends</span>
                         </li>
                     </Link>
 
                     <li>
-                        <EventNoteIcon className='icon'></EventNoteIcon>
-                        <span>Orders</span>
+                        <AutoStoriesIcon className='icon'></AutoStoriesIcon>
+                        <span>Saved Meals</span>
                     </li>
 
                     <li>
                         <ForumIcon className='icon'></ForumIcon>
-                        <span>Delivery</span>
+                        <span>Post Timeline</span>
                     </li>
-
-                    <p className='title'>USEFUL</p>
-                    <li>
-                        <span>Stats</span>
-                    </li>
-                    <li>
-                        <span>Notifications</span>
-                    </li>
-                    <p className='title'>SERVICE</p>
-                    <li>
-                        <span>System Health</span>
-                    </li>
-                    <li>
-                        <span>Logs</span>
-                    </li>
+                    <p className='title'>USER</p>
+                    <Link to='/users/abc123' style={{ textDecoration: 'none' }}>
+                        <li>
+                            <AccountBoxIcon className='icon'></AccountBoxIcon>
+                            <span>Profile</span>
+                        </li>
+                    </Link>
                     <li>
                         <SettingsIcon className='icon'></SettingsIcon>
                         <span>Setting</span>
-                    </li>
-                    <p className='title'>USER</p>
-                    <li>
-                        <AccountBoxIcon className='icon'></AccountBoxIcon>
-                        <span>Profile</span>
                     </li>
                     <li>
                         <LogoutIcon className='icon'></LogoutIcon>

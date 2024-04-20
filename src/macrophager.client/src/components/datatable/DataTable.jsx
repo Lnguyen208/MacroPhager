@@ -4,19 +4,20 @@ import { userColumns, userRows } from '../../placeholders/DataTableSource';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-const DataTable = () => {
+const DataTable = ({ type }) => {
     const [data, setData] = useState(userRows);
-
+    // temporary.
+    const buttonRoute = type == 'Daily Log' ? '/products/new' : '/users/new';
     const handleDelete = (id) => {
         setData(data.filter(item => item.id !== id));
     }
-
+    
     const actionColumn = [
         {
             field: 'action', headerName: 'Action', width: 200, renderCell: (params) => {
                 return (
                     <div className='cellAction'>
-                        <Link to='/users/test' style={{ textDecoration: 'none' }}>
+                        <Link to='/users/usernamehere' style={{ textDecoration: 'none' }}>
                             <div className='viewButton'>View</div>
                         </Link>
                         
@@ -30,9 +31,9 @@ const DataTable = () => {
     return (
         <div className='DataTable'>
             <div className='DataTableTitle'>
-                Add New User
-                <Link to='/users/new' style={{ textDecoration: 'none' }} className='link'>
-                    Add New
+                My { type }
+                <Link to={buttonRoute} style={{ textDecoration: 'none' }} className='link'>
+                    Add New { type == 'Daily Log' ? 'Food Item' : 'User' }
                 </Link>
             </div>
             <DataGrid

@@ -20,7 +20,7 @@ namespace MacroPhager.Server.Controllers
             var insertFood = new FoodItem
             {
                 food_id = Guid.NewGuid().ToString(),
-                food_name = newFood.food_name,
+                food_description = newFood.food_name,
                 serving_size = newFood.serving_size,
                 calories = newFood.calories,
                 fat = newFood.fat,

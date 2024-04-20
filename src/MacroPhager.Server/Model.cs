@@ -43,7 +43,7 @@ namespace MacroPhager.Server
         [Required, DataType(DataType.EmailAddress), MaxLength(200, ErrorMessage = "Max Length 200 characters")]
         public string email { get; set; }
 
-        [Required, StringLength(100, MinimumLength = 8, ErrorMessage = "Must be 8-100 characters")]
+        [Required, StringLength(100, MinimumLength = 8, ErrorMessage = "Must be 8-100 characters"), JsonIgnore]
         public string password { get; set; }
 
         [JsonIgnore]
@@ -67,15 +67,14 @@ namespace MacroPhager.Server
         [Required, StringLength(100, MinimumLength = 3, ErrorMessage = "Must be 3-100 characters")]
         public string last_name { get; set; }
 
-        [Required, StringLength(100, MinimumLength = 3, ErrorMessage = "Must be 3-100 characters")]
-        public string display_name { get; set; }
-
         [Required]
         [RegularExpression("([0-9][0-9]%[0-9][0-9]%[0-9]%)", ErrorMessage = "Form must be FF%CC%PP%")]
         public string macro_goal { get; set; }
 
         [Required] // need to annotate to make smaller (limit range?)
         public float tdee { get; set;}
+
+        public byte[]? pfp { get; set; }
 
         [JsonIgnore]
         public ICollection<Account> Accounts { get; set; }
@@ -103,7 +102,7 @@ namespace MacroPhager.Server
         public string food_id { get; set; } // GUID
 
         [Required, StringLength(100, MinimumLength = 3)]
-        public string food_name { get; set; }
+        public string food_description { get; set; }
 
         [Required]
         public float serving_size { get; set; }

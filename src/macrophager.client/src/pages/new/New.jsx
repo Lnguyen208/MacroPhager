@@ -4,10 +4,52 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import NavBar from '../../components/navbar/Navbar';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import { useState } from 'react'; 
+import http from '../../http-common.js';
+import defaultProfileImg from '../../assets/default-pfp.jpg'
+import defaultFoodItemImg from '../../assets/default-food-item.jpg';
 
-const New = ({ inputs, title }) => {
+const New = ({ inputs, title, itemType }) => {
 
     const [file, setFile] = useState('');
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        /*        console.log(e.target[0].files[0]);*/
+
+        let payloadImg = e.target[0].files[0];
+        if (payloadImg === undefined) { alert('Profile picture required') }
+        else {
+            let inputList = [];
+            for (let i = 1; i < e.target.length - 1; i++) {
+                inputList.push(e.target[i].value);
+            }
+            try {
+                if (itemType == 'user') {
+                    let formData = new FormData();
+                    formData.append('imageFile', payloadImg);
+                    formData.append('info', inputList);
+
+                    //for (const pair of formData.entries()) {
+                    //    console.log(pair[0], pair[1]);
+                    //}
+                    http.post('/User/register', formData, {
+                        signal: AbortSignal.timeout(100000),
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                    }).then((response) => { console.log(response); });
+                }
+                else {
+                    // end point specific for food items
+                }
+            }
+            catch (err) {
+                console.log(err);
+                throw err;
+            }
+        }
+    }
+
 
     return (
         <div className='New'>
@@ -18,27 +60,30 @@ const New = ({ inputs, title }) => {
                     <h1 className='title'>{title}</h1>
                 </div>
                 <div className='bottom'>
-                    <div className='left'>
-                        <img src={file ? URL.createObjectURL(file) : 'https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg'}  alt=''></img>
-                    </div>
+                    {itemType == 'user' ? <div className='left'>
+                        <img src={file ? URL.createObjectURL(file) : defaultProfileImg} alt=''></img>
+                    </div> : <div className='left'>
+                        <img src={file ? URL.createObjectURL(file) : defaultFoodItemImg} alt=''></img>
+                    </div> }
                     <div className='right'>
-                        <form>
+                        <form onSubmit={handleFormSubmit}>
+                            {itemType == 'user' ?
                             <div className='formInput'>
                                 <label htmlFor='file'>
-                                    Upload Image: <DriveFolderUploadIcon className='icon'></DriveFolderUploadIcon>
+                                    Upload Image (256kB Max): <DriveFolderUploadIcon className='icon'></DriveFolderUploadIcon>
                                 </label>
-                                <input type='file' id='file' onChange={e=>setFile(e.target.files[0])} style={ { display:'none' } }></input>
-                            </div>
+                                <input type='file' id='file' accept='image/png, image/jpeg' onChange={e => e.target.files[0].size > 256000 ? null : setFile(e.target.files[0])} style={ { display:'none' } }></input>
+                            </div> : null }
                             { inputs.map((input) => (
                                 <div className='formInput' key={input.id}>
                                     <label>{input.label}</label>
-                                    <input type={input.type} placeholder={input.placeholder }></input>
+                                    <input id={input.id} type={input.type} placeholder={input.placeholder} required></input>
                                 </div>
                             ))}
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+                                <input className='usersubmit' type='submit'></input>
+                            </div>
                         </form>
-                        <div style={{display:'flex', alignItems:'center', justifyContent:'flex-end'} }>
-                            <button>Send</button>
-                        </div>
                     </div>
                 </div>
             </div>

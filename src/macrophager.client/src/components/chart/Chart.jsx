@@ -5,12 +5,13 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 const Chart = ({ aspect, title }) => {
     const data = [
-        { name: 'January', Total: 1200 },
-        { name: 'February', Total: 2100 },
-        { name: 'March', Total: 800 },
-        { name: 'April', Total: 1600 },
-        { name: 'May', Total: 900 },
-        { name: 'June', Total: 1700 },
+        { Name: 'Sunday', Actual: 1500, Goal: 2000 },
+        { Name: 'Monday', Actual: 2030, Goal: 2000 },
+        { Name: 'Tuesday', Actual: 1800, Goal: 2000 },
+        { Name: 'Wednesday', Actual: 1500, Goal: 2000 },
+        { Name: 'Thursday', Actual: 2300, Goal: 2000 },
+        { Name: 'Friday', Actual: 1700, Goal: 2000 },
+        { Name: 'Saturday', Actual: 2100, Goal: 2000 },
     ];
     return (
         <div className='Chart'>
@@ -31,13 +32,19 @@ const Chart = ({ aspect, title }) => {
                             <linearGradient id='total' x1='0' y1='0' x2='0' y2='1'>
                                 <stop offset='5%' stopColor='#8884d8' stopOpacity={0.8} />
                                 <stop offset='95%' stopColor='#8884d8' stopOpacity={0} />
-                            </linearGradient>
+                        </linearGradient>
+                        <linearGradient id='goal' x1='0' y1='0' x2='0' y2='1'>
+                            <stop offset='5%' stopColor='#98FB98' stopOpacity={0.8} />
+                            <stop offset='95%' stopColor='#98FB98' stopOpacity={0} />
+                        </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" className='chart-grid' />
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Tooltip />
-                        <Area type="monotone" dataKey="Total" fillOpacity={1} stroke="#8884d8" fill="url(#total)" />
+                        <XAxis dataKey="Name" />
+                    <YAxis type="number" domain={[1000, 2500]} />
+                    <Tooltip />
+                    <Area type="monotone" dataKey="Goal" fillOpacity={1} stroke="#98FB98" fill="url(#goal)" />
+                    <Area type="monotone" dataKey="Actual" fillOpacity={1} stroke="#8884d8" fill="url(#total)" />
+
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
