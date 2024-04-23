@@ -3,16 +3,17 @@
     -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
     box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     color: gray;
-    min-height:100%;
+    min-height: 100%;
+    border-radius: 5px;
 
-    .title{
+    .title {
         margin-bottom: 20px;
         font-weight: bold;
         font-size: 16px;
         padding: 20px 0px 0px 20px;
     }
 
-    .chart-grid{
+    .chart-grid {
         stroke: rgb(228,225,225);
     }
 }

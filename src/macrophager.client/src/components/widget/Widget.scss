@@ -20,7 +20,7 @@
         }
 
         .counter {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 300;
         }
 
@@ -36,7 +36,7 @@
             font-size: 14px;
 
             &.positive {
-                color: green;
+                color: #7451f8;
             }
 
             &.negative {
@@ -44,7 +44,7 @@
             }
         }
 
-        .icon{
+        .icon {
             font-size: 18px;
             padding: 5px;
             border-radius: 5px;

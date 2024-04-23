@@ -6,43 +6,21 @@ import 'react-circular-progressbar/dist/styles.css';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-const Featured = () => {
+const Featured = ({ type, data, desc, units, goal }) => {
+    let calcPercentage = Math.ceil(data / goal * 100);
     return (
         <div className='Featured'>
             <div className='top'>
-                <h1 className='title'>Total Revenue</h1>
-            <MoreVertIcon fontSize='small'></MoreVertIcon>
+                <h1 className='title'>Today's {type} / Goal</h1>
+  {/*          <MoreVertIcon fontSize='small'></MoreVertIcon>*/}
             </div>
             <div className='bottom'>
                 <div className='featuredChart'>
-                    <CircularProgressbar value={70} text={'70%'} strokeWidth={ 5 }></CircularProgressbar>
+                    <CircularProgressbar value={calcPercentage} text={calcPercentage + "%"} strokeWidth={5}></CircularProgressbar>
                 </div>
-                <p className='title'>Total sales made</p>
-                <p className='amount'>$420</p>
-                <p className='desc'>Previous transactions processing. Last payments may not be included.</p>
-                <div className='summary'>
-                    <div className='item'>
-                        <div className='itemTitle'>Target</div>
-                        <div className='itemResult negative'>
-                        <ArrowDropDownIcon fontSize='small'></ArrowDropDownIcon>
-                            <div className='resultAmount'>$12.4k</div>
-                        </div>
-                    </div>
-                    <div className='item'>
-                        <div className='itemTitle'>Last Week</div>
-                        <div className='itemResult positive'>
-                            <ArrowDropUpIcon fontSize='small'></ArrowDropUpIcon>
-                            <div className='resultAmount'>$12.4k</div>
-                        </div>
-                    </div>
-                    <div className='item'>
-                        <div className='itemTitle'>Last Month</div>
-                        <div className='itemResult positive'>
-                            <ArrowDropUpIcon fontSize='small'></ArrowDropUpIcon>
-                            <div className='resultAmount'>$12.4k</div>
-                        </div>
-                    </div>
-                </div>
+                <p className='title'>{type}</p>
+                <p className='amount'>{data}&nbsp;{units}</p>
+                <p className='desc'>{desc}</p>
             </div>
         </div>
     )

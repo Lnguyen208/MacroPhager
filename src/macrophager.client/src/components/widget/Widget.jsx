@@ -1,6 +1,6 @@
 
 import './Widget.scss';
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import PersonIcon from '@mui/icons-material/Person';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
@@ -13,18 +13,18 @@ const Widget = ({ type }) => {
     const diff = 20;
 
     switch (type) {
-        case 'user':
+        case 'friend':
             data = {
-                title: 'USERS',
+                title: 'FRIEND POST',
                 isMoney: false,
-                link: 'See all users',
-                icon: <PersonIcon className='icon' style={{color: "crimson", backgroundColor: "rgba(255,0,0,0.2)"} }></PersonIcon>
+                link: 'See Details',
+                icon: <PersonIcon className='icon' style={{ color: "#7451f8", backgroundColor: "transparent"} }></PersonIcon>
             };
             break;
 
         case 'order':
             data = {
-                title: 'ORDERS',
+                title: 'NO NEW POSTS',
                 isMoney: false,
                 link: 'See all orders',
                 icon: <Inventory2Icon className='icon' style={{ backgroundColor: "rgba(218, 165, 32, 0.2)", color: "goldenrod" }}></Inventory2Icon>
@@ -56,14 +56,13 @@ const Widget = ({ type }) => {
         <div className='Widget'>
             <div className='left'>
                 <span className='title'>{data.title}</span>
-                <span className='counter'>{data.isMoney && '$'} {amt}</span>
+                <span className='counter'>{data.isMoney && '$'} {"I binged ate at Kura ;c Guys Help OMG OMGOMG HOW d"}</span>
             <span className='link'>{data.link}</span>
             </div>
             <div className='right'>
-                <div className='percentage positive'>
-                    <ArrowDropUpIcon></ArrowDropUpIcon>
-                    {diff} %
-                </div>
+                {/*<div className='percentage positive'>*/}
+                {/*    {diff}&nbsp;&nbsp;<ThumbUpIcon></ThumbUpIcon>*/}
+                {/*</div>*/}
                 {data.icon}
             </div>
         </div>

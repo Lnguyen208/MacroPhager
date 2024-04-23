@@ -5,28 +5,66 @@ import Widget from '../../components/widget/Widget';
 import Featured from '../../components/featured/Featured';
 import Chart from '../../components/chart/Chart';
 import TheTable from '../../components/table/TheTable';
+import {nutritionFeatured} from '../../placeholders/FeaturedSource.jsx';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const Home = () => {
+    const responsive = {
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 1,
+            slidesToSlide: 1 // optional, default to 1.
+        }
+    };
     return (
         <div className='Home'>
             <Sidebar></Sidebar>
             <div className='homeContainer'>
                 <Navbar></Navbar>
                 <div className='widgets'>
-                    <Widget type='user'></Widget>
-                    <Widget type='order'></Widget>
-                    <Widget type='earnings'></Widget>
-                    <Widget type='balance'></Widget>
+                    <Widget type='friend'></Widget>
+                    <Widget type='friend'></Widget>
+                    <Widget type='friend'></Widget>
+                    <Widget type='friend'></Widget>
                 </div>
-                <div className='charts'>
-                    <Featured></Featured>
-                    <Chart aspect={2/1} title="Last 7 Days (Calories)"></Chart>
+                <div className='stats'>
+                    <div className='carousel'>
+                        <Carousel
+                            className='items'
+                            swipeable={false}
+                            responsive={responsive}
+                            draggable={false}
+                            infinite={true}
+                            showDots={true}
+                            autoPlay={false}>
+                            {
+                                nutritionFeatured.map((n) => {
+                                    return (
+                                        <Featured
+                                            key={n.id}
+                                            type={n.type}
+                                            data={n.data}
+                                            desc={n.desc}
+                                            units={n.units}
+                                            goal={n.goal}
+                                        ></Featured>
+                                    );})
+                            }
+                        </Carousel>
+                    </div>
+                    <div className='charts'>
+                        <Chart aspect={3 / 1} title="Last 7 Days (Calories)"></Chart>
+                    </div>
+                    <div>
+                        Add Pie Chart Here of Current Daily Log's Distributions
+                    </div>
                 </div>
                 <div className='listContainer'>
                     <div className='listTitle'>
-                        Latest Transactions
-                        <TheTable></TheTable>
+                        Last 5 Food Items Logged
                     </div>
+                    <TheTable></TheTable>
                 </div>
             </div>
         </div>

@@ -1,7 +1,5 @@
 .Featured {
     flex: 2;
-    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
     padding: 10px;
     height: fit-content;
 
@@ -14,6 +12,7 @@
         .title {
             font-size: 16px;
             font-weight: bold;
+            margin-left: 5px;
         }
     }
 
@@ -29,6 +28,14 @@
         .featuredChart {
             width: 150px;
             height: 150px;
+        }
+
+        .CircularProgressbar-path {
+            stroke: #7451f8;
+        }
+
+        .CircularProgressbar-text {
+            fill: #7451f8;
         }
 
         .title {

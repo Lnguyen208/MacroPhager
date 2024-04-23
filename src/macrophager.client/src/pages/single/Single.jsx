@@ -55,7 +55,7 @@ const Single = () => {
                     </div>
                 </div>
                 <div className='bottom'>
-                    <h1 className='title'>Today's Food Log</h1>
+                    <h1 className='title'>My Top 5 Food Items (Last 7 Days)</h1>
                     <TheTable></TheTable>
                 </div>
             </div>

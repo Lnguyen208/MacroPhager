@@ -10,20 +10,43 @@
             gap: 20px;
         }
 
-        .charts {
-            padding: 5px 20px;
+        .stats {
+            display: flex;
+
+            .carousel {
+                max-width: 350px;
+                flex: 2;
+                padding: 5px 5px 0px 20px;
+
+                .items {
+                    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+                    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+                    padding-bottom: 30px;
+                    padding-top: 10px;
+                    min-height: 300px;
+                    border-radius: 5px;
+                }
+
+                .react-multi-carousel-dot-list {
+                    padding-bottom: 10px;
+                }
+            }
+
+            .charts {
+                flex: 1;
+                padding: 5px 20px;
+            }
         }
 
         .listContainer {
-            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
-            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
             padding: 20px;
             margin: 20px;
 
-            .listTitle{
+            .listTitle {
                 font-size: 15px;
                 font-weight: 500;
                 color: gray;
+                margin-bottom: 5px;
             }
         }
     }

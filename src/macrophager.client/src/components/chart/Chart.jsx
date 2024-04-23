@@ -16,17 +16,17 @@ const Chart = ({ aspect, title }) => {
     return (
         <div className='Chart'>
         <div className='title'>{title}</div>
-                <ResponsiveContainer width="100%" aspect={aspect}>
+            <ResponsiveContainer width="95%" height={349}>
                     <AreaChart
-                        width={730}
-                        height={250}
-                        data={data}
-                        margin={{
-                            top: 10,
-                            right: 30,
-                            left: 0,
-                            bottom: 0,
-                        }}
+                    width={730}
+                    height={250}
+                    data={data}
+                    margin={{
+                        top: 0,
+                        right: 0,
+                        left: 20,
+                        bottom: 20,
+                    }}
                     >
                         <defs>
                             <linearGradient id='total' x1='0' y1='0' x2='0' y2='1'>
@@ -34,7 +34,7 @@ const Chart = ({ aspect, title }) => {
                                 <stop offset='95%' stopColor='#8884d8' stopOpacity={0} />
                         </linearGradient>
                         <linearGradient id='goal' x1='0' y1='0' x2='0' y2='1'>
-                            <stop offset='5%' stopColor='#98FB98' stopOpacity={0.8} />
+                            <stop offset='5%' stopColor='#7DD8A8' stopOpacity={0.8} />
                             <stop offset='95%' stopColor='#98FB98' stopOpacity={0} />
                         </linearGradient>
                         </defs>
@@ -42,7 +42,7 @@ const Chart = ({ aspect, title }) => {
                         <XAxis dataKey="Name" />
                     <YAxis type="number" domain={[1000, 2500]} />
                     <Tooltip />
-                    <Area type="monotone" dataKey="Goal" fillOpacity={1} stroke="#98FB98" fill="url(#goal)" />
+                    <Area type="monotone" dataKey="Goal" fillOpacity={0.5} stroke="#7DD8A8" fill="url(#goal)" />
                     <Area type="monotone" dataKey="Actual" fillOpacity={1} stroke="#8884d8" fill="url(#total)" />
 
                     </AreaChart>
