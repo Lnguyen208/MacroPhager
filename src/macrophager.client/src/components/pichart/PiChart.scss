@@ -1,0 +1,45 @@
+
+.PiChart {
+    -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    border-radius: 5px;
+    min-height: 100%;
+    color: gray;
+
+    .title {
+        margin-bottom: 20px;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 20px 0px 0px 20px;
+    }
+
+    .spinner{
+        display:flex;
+        align-items:center;
+        justify-content: center;
+    }
+
+    .breakdown {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 16px;
+
+        &.fats {
+            color: #5F42CC;
+        }
+
+        &.carbs {
+            color: #37B874;
+        }
+
+        &.proteins {
+            color: #1D73C1;
+        }
+    }
+
+    .recharts-surface {
+        padding-left: 10px;
+    }
+}

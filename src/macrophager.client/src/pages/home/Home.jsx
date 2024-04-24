@@ -8,6 +8,7 @@ import TheTable from '../../components/table/TheTable';
 import {nutritionFeatured} from '../../placeholders/FeaturedSource.jsx';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import PiChart from '../../components/pichart/PiChart';
 
 const Home = () => {
     const responsive = {
@@ -25,8 +26,8 @@ const Home = () => {
                 <div className='widgets'>
                     <Widget type='friend'></Widget>
                     <Widget type='friend'></Widget>
-                    <Widget type='friend'></Widget>
-                    <Widget type='friend'></Widget>
+                    <Widget type='order'></Widget>
+                    <Widget type='order'></Widget>
                 </div>
                 <div className='stats'>
                     <div className='carousel'>
@@ -37,7 +38,8 @@ const Home = () => {
                             draggable={false}
                             infinite={true}
                             showDots={true}
-                            autoPlay={false}>
+                            autoPlay={true}
+                            autoPlaySpeed={5000}                        >
                             {
                                 nutritionFeatured.map((n) => {
                                     return (
@@ -49,15 +51,16 @@ const Home = () => {
                                             units={n.units}
                                             goal={n.goal}
                                         ></Featured>
-                                    );})
+                                    );
+                                })
                             }
                         </Carousel>
                     </div>
                     <div className='charts'>
                         <Chart aspect={3 / 1} title="Last 7 Days (Calories)"></Chart>
                     </div>
-                    <div>
-                        Add Pie Chart Here of Current Daily Log's Distributions
+                    <div className='macrodistr'>
+                        <PiChart></PiChart>
                     </div>
                 </div>
                 <div className='listContainer'>
@@ -68,7 +71,7 @@ const Home = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Home

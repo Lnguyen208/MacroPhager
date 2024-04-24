@@ -19,7 +19,7 @@ const DataTable = ({ type, data }) => {
     useEffect(() => {
         setIncomingData(data);
 
-    },[]);
+    }, []);
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -56,7 +56,7 @@ const DataTable = ({ type, data }) => {
                     My {type}
                     {type == 'Daily Log' ? (
                         <Link to='/foodlog/new' style={{ textDecoration: 'none' }} className='link'>
-                            Make a New Food Item
+                            Make New Food Item or Meal
                         </Link>
                     ) : (
                         <div className='newFriendButton' onClick={handleClickOpen}>Add New Friend</div>

@@ -15,7 +15,7 @@
 
             .carousel {
                 max-width: 350px;
-                flex: 2;
+                flex: 1;
                 padding: 5px 5px 0px 20px;
 
                 .items {
@@ -33,8 +33,15 @@
             }
 
             .charts {
-                flex: 1;
-                padding: 5px 20px;
+                flex: 2;
+                padding: 5px 20px 0px 10px;
+                min-width: 350px;
+            }
+
+            .macrodistr {
+                padding: 5px 20px 0px 0px;
+                min-width: 400px;
+                max-width: 500px;
             }
         }
 

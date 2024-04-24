@@ -3,7 +3,8 @@ import './Widget.scss';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import PersonIcon from '@mui/icons-material/Person';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import Inventory2Icon from '@mui/icons-material/Inventory2';
+import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
+import { Link } from 'react-router-dom';
 
 const Widget = ({ type }) => {
 
@@ -17,8 +18,9 @@ const Widget = ({ type }) => {
             data = {
                 title: 'FRIEND POST',
                 isMoney: false,
-                link: 'See Details',
-                icon: <PersonIcon className='icon' style={{ color: "#7451f8", backgroundColor: "transparent"} }></PersonIcon>
+                link: 'Friend Username',
+                icon: <PersonIcon className='icon' style={{ color: "#5F42CC", backgroundColor: "transparent" }}></PersonIcon>,
+                message: 'I binged ate at Kura ;c Guys Help OMG OMGOMG HOW d"'
             };
             break;
 
@@ -26,8 +28,9 @@ const Widget = ({ type }) => {
             data = {
                 title: 'NO NEW POSTS',
                 isMoney: false,
-                link: 'See all orders',
-                icon: <Inventory2Icon className='icon' style={{ backgroundColor: "rgba(218, 165, 32, 0.2)", color: "goldenrod" }}></Inventory2Icon>
+                link: 'Explore Public Posts',
+                icon: <ExploreOutlinedIcon className='icon' style={{ backgroundColor: "transparent", color: "#444444" }}></ExploreOutlinedIcon>,
+                message: '...',
             };
             break;
 
@@ -55,9 +58,14 @@ const Widget = ({ type }) => {
     return (
         <div className='Widget'>
             <div className='left'>
-                <span className='title'>{data.title}</span>
-                <span className='counter'>{data.isMoney && '$'} {"I binged ate at Kura ;c Guys Help OMG OMGOMG HOW d"}</span>
-            <span className='link'>{data.link}</span>
+                <span className={type == 'friend' ? 'title friend' : 'title explore'}>{data.title}</span>
+                 <Link className='description' to={type == 'friend' ? 'users/timeline/post_id' : 'users/timeline'} style={{ textDecoration: 'none' }}>
+                      <span className='counter'>{data.message}</span>
+                 </Link>
+                <Link to={type == 'friend' ? '/users/frienduser' : '/users'} style={{ textDecoration: 'none' }}>
+                    <span className={type == 'friend' ? 'link friend' : 'link explore'}>{data.link}</span>
+                </Link>
+                
             </div>
             <div className='right'>
                 {/*<div className='percentage positive'>*/}

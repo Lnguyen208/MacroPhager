@@ -13,6 +13,7 @@ import {useContext} from 'react';
 
 const Sidebar = () => {
     const { darkMode, dispatch } = useContext(DarkModeContext);
+    localStorage.setItem('username', 'pallaspoop2024');
 
     return (
         <div className='Sidebar'>
@@ -33,30 +34,33 @@ const Sidebar = () => {
                     </Link>
 
                     <p className='title'>ACTIONS</p>
-                    <Link to='/users' style={{ textDecoration: 'none' }}>
+                    <Link to='/foodlog' style={{ textDecoration: 'none' }}>
                         <li>
                             <DiningIcon className='icon'></DiningIcon>
                             <span>Food Log</span>
                         </li>
                     </Link>
-                    <Link to='/products' style={{ textDecoration: 'none' }}>
+                    <Link to='/friends' style={{ textDecoration: 'none' }}>
                         <li>
                             <SupervisedUserCircleIcon className='icon'></SupervisedUserCircleIcon>
                             <span>My Friends</span>
                         </li>
                     </Link>
+                    <Link to='/foodlog/meals' style={{ textDecoration: 'none' }}>
+                        <li>
+                            <AutoStoriesIcon className='icon'></AutoStoriesIcon>
+                            <span>Saved Meals</span>
+                        </li>
+                    </Link>
+                    <Link to='/users/timeline' style={{ textDecoration: 'none' }}>
+                        <li>
+                            <ForumIcon className='icon'></ForumIcon>
+                            <span>Post Timeline</span>
+                        </li>
+                    </Link>
 
-                    <li>
-                        <AutoStoriesIcon className='icon'></AutoStoriesIcon>
-                        <span>Saved Meals</span>
-                    </li>
-
-                    <li>
-                        <ForumIcon className='icon'></ForumIcon>
-                        <span>Post Timeline</span>
-                    </li>
                     <p className='title'>USER</p>
-                    <Link to='/users/abc123' style={{ textDecoration: 'none' }}>
+                    <Link to={'/users/'+localStorage.getItem('username')} style={{ textDecoration: 'none' }}>
                         <li>
                             <AccountBoxIcon className='icon'></AccountBoxIcon>
                             <span>Profile</span>

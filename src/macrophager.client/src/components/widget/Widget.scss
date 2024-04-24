@@ -16,18 +16,38 @@
         .title {
             font-size: 14px;
             font-weight: bold;
-            color: rgb(160,160,160);
+
+            &.friend {
+                color: #5F42CC;
+            }
+
+            &.explore {
+                color: #444444;
+            }
         }
 
-        .counter {
-            font-size: 22px;
-            font-weight: 300;
+        .description {
+            overflow: hidden;
+
+            .counter {
+                font-size: 19px;
+                font-weight: 300;
+                
+            }
         }
 
         .link {
             width: max-content;
             font-size: 12px;
             border-bottom: 1px solid gray;
+
+            &.friend {
+                color: #5F42CC;
+            }
+
+            &.explore {
+                color: #444444;
+            }
         }
 
         .percentage {
