@@ -8,16 +8,44 @@ import TextField from '@mui/material/TextField';
 import { DataGrid } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { foodColumns, userColumns } from '../../placeholders/DataTableSource';
+import { userColumns, userRows } from '../../placeholders/DataTableSource';
 import './DataTable.scss';
 import CircularProgress from '@mui/material/CircularProgress';
+import http from '../../http-common.js';
 
-const DataTable = ({ type, data }) => {
+const DataTable = () => {
+
     const [incomingData, setIncomingData] = useState(null);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        setIncomingData(data);
+        // fetch should return all of user's friends
+        // for now, store user's username in local storage unless you have time for a middlewhere...
+        http.post('/users/getFriends', {
+            signal: AbortSignal.timeout(10000),
+        }).then((response) => {
+            console.log(response);
+            setIncomingData(response.data);
+        }).catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+        });
+
+        setIncomingData(userRows);
 
     },[]);
     const handleClickOpen = () => {
@@ -53,19 +81,13 @@ const DataTable = ({ type, data }) => {
         ) : (
             <div className='DataTable'>
                 <div className='DataTableTitle'>
-                    My {type}
-                    {type == 'Daily Log' ? (
-                        <Link to='/foodlog/new' style={{ textDecoration: 'none' }} className='link'>
-                            Make a New Food Item
-                        </Link>
-                    ) : (
-                        <div className='newFriendButton' onClick={handleClickOpen}>Add New Friend</div>
-                    )}
+                    My Friends
+                    <div className='newFriendButton' onClick={handleClickOpen}>Add New Friend</div>
                 </div>
                 <DataGrid
                     className='datagridtable'
                     rows={incomingData}
-                    columns={type == 'Friends' ? userColumns.concat(actionColumn) : foodColumns.concat(actionColumn)}
+                    columns={userColumns.concat(actionColumn)}
                     initialState={{
                         pagination: {
                             paginationModel: { page: 0, pageSize: 10 },
@@ -83,8 +105,9 @@ const DataTable = ({ type, data }) => {
                             event.preventDefault();
                             const formData = new FormData(event.currentTarget);
                             const formJson = Object.fromEntries(formData.entries());
-                            const email = formJson.email;
-                            console.log(email);
+                            console.log(formJson);
+                            const username = formJson.username;
+                            console.log(username);
                             handleClose();
                         },
                     }}

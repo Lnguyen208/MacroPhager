@@ -26,8 +26,8 @@ const Home = () => {
                 <div className='widgets'>
                     <Widget type='friend'></Widget>
                     <Widget type='friend'></Widget>
-                    <Widget type='order'></Widget>
-                    <Widget type='order'></Widget>
+                    <Widget type='none'></Widget>
+                    <Widget type='none'></Widget>
                 </div>
                 <div className='stats'>
                     <div className='carousel'>
@@ -60,7 +60,7 @@ const Home = () => {
                         <Chart aspect={3 / 1} title="Last 7 Days (Calories)"></Chart>
                     </div>
                     <div className='macrodistr'>
-                        <PiChart></PiChart>
+                        <PiChart title={ "Today's Macro Distribution" }></PiChart>
                     </div>
                 </div>
                 <div className='listContainer'>

@@ -12,7 +12,7 @@ const List = ({ type }) => {
             <Sidebar></Sidebar>
             <div className='listContainer'>
                 <Navbar></Navbar>
-                {type == 'Daily Log' ? (<DataTable2 type={type} data={foodRows}></DataTable2>) : <DataTable type='Friends' data={userRows}></DataTable>}
+                {type == 'Daily Log' ? (<DataTable2></DataTable2>) : <DataTable></DataTable>}
             </div>
         </div>
     )

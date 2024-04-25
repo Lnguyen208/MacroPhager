@@ -11,16 +11,16 @@ const data = [
     { id: 2, value: 20, label: 'Proteins (%)', color: '#6FA8DC' },
 ];
 
-const PiChart = () => {
+const PiChart = ({ title, inputData }) => {
     const [macrodistrData, setmacrodistrData] = useState(null);
 
     useEffect(() => {
-        http.post('/getMacroDistribution', {
+        http.post('/foodlog/getMacroDistribution', {
             signal: AbortSignal.timeout(10000),
         }).then((response) => {
             console.log(response);
             setmacrodistrData(response.data);
-        }).catch (function (error) {
+        }).catch(function (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
                 // that falls out of the range of 2xx
@@ -37,26 +37,34 @@ const PiChart = () => {
                 console.log('Error', error.message);
             }
             console.log(error.config);
-        })
+        });
         setmacrodistrData(data);
     },[]);
 
     return (
         <div className='PiChart'>
-            <div className='title'>Current Macros Distribution</div>
+            <div className='title'>{ title }</div>
             {macrodistrData == null ?
                 (<div className='spinner'><CircularProgress size='10rem' color='inherit' thickness={2}></CircularProgress></div>) :
                 (<PieChart
-                series={[
-                    {
-                        data,
-                        highlightScope: { faded: 'global', highlighted: 'item' },
-                        faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
-                    },
-                ]}
-                height={200}
+                    series={[
+                        {
+                            data,
+                            highlightScope: { faded: 'global', highlighted: 'item' },
+                            faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+                        },
+                    ]}
+                    height={200}
+                    width={400}
+                    slotProps={{
+                        legend: {
+                            direction: 'column',
+                            position: { horizontal: 'left' },
+                            hidden: true
+                        }
+                    }}
                 />)}
-            <div className='title'>Breakdown Total:</div>
+            <div className='descriptionTitle'>Breakdown Total</div>
             <div className='breakdown'>
                 <span className='breakdown fats'>Fats: {macrodistrData == null ? 0: macrodistrData[0].value} g</span>
                 <span className='breakdown carbs'>Carbs: {macrodistrData == null ? 0 : macrodistrData[1].value} g</span>

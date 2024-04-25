@@ -7,7 +7,6 @@ import Single from './pages/single/Single';
 import New from './pages/new/New';
 import Timeline from './pages/timeline/Timeline';
 import Meals from './pages/meals/Meals';
-import Posts from './pages/posts/Posts';
 import { userInputs, productInputs } from './placeholders/FormSource';
 import './styles/dark.scss';
 import { DarkModeContext } from './context/darkModeContext';
@@ -35,7 +34,6 @@ function App() {
                         <Route index element={<div>Hello World!</div>}></Route>
                         <Route path=':username' element={<Single></Single>}></Route>
                         <Route path='timeline' element={<Timeline></Timeline>}>
-                            <Route path=':post_id' element={<Posts></Posts>}></Route>
                         </Route>
                     </Route>
                 </Routes>
