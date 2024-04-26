@@ -7,113 +7,62 @@ import 'react-vertical-timeline-component/style.min.css';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import CircularProgress from '@mui/material/CircularProgress';
 import http from '../../http-common.js';
+import { useState, useEffect } from 'react';
+import defaultPfp from '../../assets/default-pfp.jpg';
 
 const Timeline = () => {
+
+    const [latestposts, setlatestposts] = useState([]);
+    useEffect(() => {
+        http.post('/Post/getbydate', { username: localStorage.getItem('username'), earliest: '', latest: ''},{
+            signal: AbortSignal.timeout(10000),
+        }).then((response) => {
+            console.log(response);          
+            setlatestposts(response.data);
+
+        }).catch(function (error) {
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+        });
+    }, []);
+
     return(
         <div className = 'Timeline' >
             <Sidebar></Sidebar> 
             <div className='timelineContainer'>
                 <Navbar></Navbar>
-                <VerticalTimeline lineColor={'#444444'} layout={ '1-column-left' }>
-                    <VerticalTimelineElement
+                <VerticalTimeline lineColor={'#444444'} layout={'1-column-left'}>
+                {latestposts.map((item) => {
+                    return (<VerticalTimelineElement
+                        key={item.post_id}
                         className="vertical-timeline-element--work"
                         contentStyle={{ background: '#E8E2FF', color: 'black' }}
                         contentArrowStyle={{ borderRight: '7px solid  #E8E2FF' }}
-                        date="24/04/2024"
-                        icon={<img className='friendImg' src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt=''></img>}
+                        date={item.time_stamp.substring(0, 9)}
+                        icon={<img className='friendImg' src={'data:'.concat(item.img_type).concat(';base64,').concat(item.poster_picture)} alt=''></img>}
                     >
-                        <h3 className="vertical-timeline-element-title">Title</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Username</h4>
+                        <h3 className="vertical-timeline-element-title">{item.title}</h3>
+                        <h4 className="vertical-timeline-element-subtitle">{item.posted_by}</h4>
                         <p>
-                            Description HERE
+                            {item.description}
                         </p>
-                        <CircularProgress></CircularProgress>
-
-                    </VerticalTimelineElement>
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        contentStyle={{ background: '#E8E2FF', color: 'black' }}
-                        contentArrowStyle={{ borderRight: '7px solid  #E8E2FF' }}
-                        date="24/04/2024"
-                        icon={<img className='friendImg' src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt=''></img>}
-                    >
-                        <h3 className="vertical-timeline-element-title">Title</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Username</h4>
-                        <p>
-                            Description HERE
-                        </p>
-                        <CircularProgress></CircularProgress>
-                    </VerticalTimelineElement>
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        date="24/04/2024"
-                        contentStyle={{ background: '#E8E2FF', color: 'black' }}
-                        contentArrowStyle={{ borderRight: '7px solid  #E8E2FF' }}
-                        icon={<img className='friendImg' src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt=''></img>}
-                    >
-                        <h3 className="vertical-timeline-element-title">Title</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Username</h4>
-                        <p>
-                            Description HERE
-                        </p>
-                        <CircularProgress></CircularProgress>
-                    </VerticalTimelineElement>
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--work"
-                        date="24/04/2024"
-                        contentStyle={{ background: '#E8E2FF', color: 'black' }}
-                        contentArrowStyle={{ borderRight: '7px solid  #E8E2FF' }}
-                        icon={<img className='friendImg' src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt=''></img>}
-                    >
-                        <h3 className="vertical-timeline-element-title">Title</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Username</h4>
-                        <p>
-                            Description HERE
-                        </p>
-                        <CircularProgress></CircularProgress>
-                    </VerticalTimelineElement>
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--education"
-                        date="24/04/2024"
-                        contentStyle={{ background: '#E8E2FF', color: 'black' }}
-                        contentArrowStyle={{ borderRight: '7px solid  #E8E2FF' }}
-                        icon={<img className='friendImg' src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt=''></img>}
-                    >
-                        <h3 className="vertical-timeline-element-title">Title</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Username</h4>
-                        <p>
-                            Description HERE
-                        </p>
-                        <CircularProgress></CircularProgress>
-                    </VerticalTimelineElement>
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--education"
-                        date="24/04/2024"
-                        contentStyle={{ background: '#E8E2FF', color: 'black' }}
-                        contentArrowStyle={{ borderRight: '7px solid  #E8E2FF' }}
-                        icon={<img className='friendImg' src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt=''></img>}
-                    >
-                        <h3 className="vertical-timeline-element-title">Title</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Username</h4>
-                        <p>
-                            Description HERE
-                        </p>
-                        <CircularProgress></CircularProgress>
-                    </VerticalTimelineElement>
-                    <VerticalTimelineElement
-                        className="vertical-timeline-element--education"
-                        date="24/04/2024"
-                        contentStyle={{ background: '#E8E2FF', color: 'black' }}
-                        contentArrowStyle={{ borderRight: '7px solid  #E8E2FF' }}
-                        icon={<img className='friendImg' src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt=''></img>}
-                    >
-                        <h3 className="vertical-timeline-element-title">Title</h3>
-                        <h4 className="vertical-timeline-element-subtitle">Username</h4>
-                        <p>
-                            Description HERE
-                        </p>
-                        <CircularProgress></CircularProgress>
-                    </VerticalTimelineElement>
+                    </VerticalTimelineElement>)
+                })}
+                    
                     <VerticalTimelineElement
                         iconStyle={{ background: '#7451f8', color: '#fff' }}
                         icon={<div onClick={(e) => { console.log('clicked'); document.documentElement.scrollTop = 0; }} style={{ cursor: 'pointer', height:'100%', width:'100%' }}>

@@ -9,6 +9,8 @@ import {nutritionFeatured} from '../../placeholders/FeaturedSource.jsx';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import PiChart from '../../components/pichart/PiChart';
+import { useState, useEffect } from 'react';
+import http from '../../http-common.js';
 
 const Home = () => {
     const responsive = {
@@ -18,17 +20,51 @@ const Home = () => {
             slidesToSlide: 1 // optional, default to 1.
         }
     };
+    
+    // Pass in the entire response POST object.
+    const [fourposts, setfourposts] = useState(null);
+
+    useEffect(() => {
+        http.post('/Post/getrecent', { username: localStorage.getItem('username') }, {
+            signal: AbortSignal.timeout(10000),
+        }).then((response) => {
+            //console.log(response); // expected: list with at most four posts.
+            
+            var postObjects = response.data;
+            //console.log(postObjects);
+            //console.log(length);
+            const widgetPostIds = [];
+
+            postObjects.forEach((p) => { widgetPostIds.push(p.post_id); console.log(p.post_id); });
+            setfourposts(widgetPostIds);
+
+        }).catch(function (error) {
+            if (error.response) {
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                console.log('Error', error.message);
+            }
+            console.log(error.config);
+        });
+    }, []);
+
+
+
     return (
         <div className='Home'>
             <Sidebar></Sidebar>
             <div className='homeContainer'>
                 <Navbar></Navbar>
-                <div className='widgets'>
-                    <Widget type='friend'></Widget>
-                    <Widget type='friend'></Widget>
-                    <Widget type='none'></Widget>
-                    <Widget type='none'></Widget>
-                </div>
+                {fourposts != null ? (<div className='widgets'>
+                    <Widget type= 'friend' post={fourposts[0]}></Widget>
+                    <Widget type='friend' post={fourposts[1]}></Widget>
+                    <Widget type='friend' post={fourposts[2]}></Widget>
+                    <Widget type='friend' post={fourposts[3]}></Widget>
+                </div>): null }
                 <div className='stats'>
                     <div className='carousel'>
                         <Carousel

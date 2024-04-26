@@ -13,7 +13,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
 import http from '../../http-common.js';
 import { useState, useEffect, forwardRef } from 'react';
 
@@ -21,10 +20,18 @@ const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-const Widget = ({ type }) => {
+const Widget = ({ type, post }) => {
     const [open, setOpen] = useState(false);
     const [like, setLike] = useState(false);
+    const [postData, setPostData] = useState(null);
+
+    useEffect(() => {
+        if (post != null) {
+            http.post('/Post/getbyid', { post_id: post }).then((response) => {
+                setPostData(response.data);
+            });
+        }
+    }, []);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -44,20 +51,19 @@ const Widget = ({ type }) => {
         case 'friend':
             data = {
                 title: 'FRIEND POST',
-                isMoney: false,
-                link: 'Friend Username',
+                link: 'username', //this should changes
                 icon: <PersonIcon className='icon' style={{ color: "#5F42CC", backgroundColor: "transparent" }}></PersonIcon>,
-                message: 'I binged ate at Kura ;c Guys Help OMG OMGOMG HOW d"'
+                message: 'title' // this should change
             };
+            console.log(postData);
             break;
 
         case 'none':
             data = {
                 title: 'NO NEW POSTS',
-                isMoney: false,
                 link: 'View My Timeline',
                 icon: <ExploreOutlinedIcon className='icon' style={{ backgroundColor: "transparent", color: "#444444" }}></ExploreOutlinedIcon>,
-                message: 'No More Posts Found Today',
+                message: 'No More Posts Found',
             };
             break;
         default:
@@ -68,38 +74,32 @@ const Widget = ({ type }) => {
         <div className='Widget'>
             <div className='left'>
                 <span className={type == 'friend' ? 'title friend' : 'title explore'}>{data.title}</span>
-                {/* Change this to open Post Dialog instead*/}
-                <span className='counter' onClick={handleClickOpen}>{data.message}</span>
-                <Link to={type == 'friend' ? '/users/frienduser' : '/users/timeline'} style={{ textDecoration: 'none' }}>
+
+                {type == 'friend' ? <span className='counter friend' onClick={handleClickOpen}>{data.message}</span> :
+                    <span className='counter none'>{data.message}</span>}
+                
+                <Link to={type == 'friend' ? '/users/' + localStorage.getItem('username') : '/users/timeline'} state={ { username: localStorage.getItem('username') }} style={{ textDecoration: 'none' }}>
                     <span className={type == 'friend' ? 'link friend' : 'link explore'}>{data.link}</span>
                 </Link>
                 
             </div>
             <div className='right'>
-                {/*<div className='percentage positive'>*/}
-                {/*    {diff}&nbsp;&nbsp;<ThumbUpIcon></ThumbUpIcon>*/}
-                {/*</div>*/}
                 {data.icon}
             </div>
-            {/*            <PostDialog></PostDialog>*/}
-            <Dialog
+            {type == 'friend' ? <Dialog
                 open={open}
                 onClose={handleClose}
                 TransitionComponent={Transition}
                 keepMounted
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle>Post {'#123456'}</DialogTitle>
+                <DialogTitle style={{ padding: '20px 0px 10px 0px', textAlign:'center'} }>{'title'}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        <h3>I binged ate at Kura ;c Guys Help OMG OMGOMG HOW d</h3>
+                    <DialogContentText style={{ margin: '-2px 0px 10px 0px' }}>
+                        <p style={{ textAlign: 'justify' }}>{'description'}</p>
                     </DialogContentText>
-                    <DialogContentText>
-                        <p>username</p>
-                    </DialogContentText>
-                    <DialogContentText>
-                        <p style={{ textAlign: 'justify'}}> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop p
-                        </p>
+                    <DialogContentText style={{ color: '#5F42CC' } }>
+                        <p>{' -- '+'username'}</p>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -109,7 +109,8 @@ const Widget = ({ type }) => {
                     </Button>
                     <Button style={{ margin: '0px 10px 10px 10px' }} onClick={handleClose} variant='outlined' size='medium'>Close</Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> : null }
+
         </div>
     )
 }

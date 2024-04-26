@@ -79,26 +79,32 @@ namespace MacroPhager.Server.Controllers
         {
             var u = new SqlParameter("username", userRequest.username);
             var userProfile = _macrophagercontext.Set<Account>().FromSqlRaw($"SELECT * FROM [Accounts] WHERE username = @username", u);
-
-            return Ok(userProfile);
+            var r = userProfile.FirstOrDefault();
+            var splitmacros = r.macro_goal.Split('%');
+            var response = new ProfileResponse()
+            {
+                username = r.username,
+                email = r.email,
+                first_name = r.first_name,
+                last_name = r.last_name,
+                macro_fat = float.Parse(splitmacros[0]),
+                macro_carb = float.Parse(splitmacros[1]),
+                macro_protein = float.Parse(splitmacros[2]),
+                tdee = r.tdee,
+                profile_picture = r.profile_picture,
+                img_type = r.img_type,
+            };
+            return Ok(response);
         }
 
         // Return user's list of friends pfp and username 
         [HttpPost("friendlist")]
         public async Task<IActionResult> GetFriendList(UserRequest userRequest)
         {
-            
-            return Ok("sadge");
-        }
-
-        // Return user's list of friends pfp and username 
-        [HttpPost("addfriend")]
-        public async Task<IActionResult> AddFriend(UserRequest userRequest)
-        {
             try
             {
                 var u = new SqlParameter("username", userRequest.username);
-                var friendList = _macrophagercontext.Set<Account>().FromSqlRaw($"SELECT [friend_username] AS Friend FROM [Accounts] INNER JOIN [Friend] ON username = @username", u);
+                var friendList = _macrophagercontext.Set<Account>().FromSqlRaw($"SELECT [friend_username] FROM [Accounts] INNER JOIN [Friends] ON Accounts.username = Friends.username WHERE Accounts.username = @username", u);
                 var friendpfp = new List<FriendList>();
 
                 await friendList.ForEachAsync((f) =>
@@ -112,6 +118,24 @@ namespace MacroPhager.Server.Controllers
                     });
                 });
                 return Ok(friendList);
+            }
+            catch (Exception ex) { return BadRequest("internal error"); }
+        }
+
+        // Return user's list of friends pfp and username 
+        [HttpPost("addfriend")]
+        public async Task<IActionResult> AddFriend(UserRequest userRequest)
+        {
+            try
+            {
+                _macrophagercontext.Set<Friend>().Add(new Friend()
+                {
+                    username = userRequest.username,
+                    friend_username = userRequest.friend_username,
+                });
+                await _macrophagercontext.SaveChangesAsync();
+
+                return Ok(userRequest.friend_username+" has been added.");
             } catch(Exception ex) { return BadRequest("internal error"); }
         }
     }

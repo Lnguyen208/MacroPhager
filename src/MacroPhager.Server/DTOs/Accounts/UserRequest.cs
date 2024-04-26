@@ -4,5 +4,6 @@
     {
         public string username {  get; set; }
 
+        public string? friend_username {  get; set; }   
     }
 }
