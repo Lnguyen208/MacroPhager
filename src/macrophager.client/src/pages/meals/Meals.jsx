@@ -25,7 +25,7 @@ const Meals = () => {
                                     <div id={1} className='editButton' onClick={(e) => { alert(e.target.id); console.log(e.target) }}>Details</div>
                                 </div>
                                 <PiChart title={"Macro Distribution"}></PiChart>
-                                <div className='addButton'>Add to Meal Daily Log</div>
+                                <div className='addButton' onClick={(e) => { alert(e.target.className + ' clicked'); console.log(e.target); }}>Add to Meal to Daily Log</div>
                             </div>
                         </div>
                     </div>
@@ -37,37 +37,13 @@ const Meals = () => {
                         
                         <div className='center'>
                             <ul>
-                                <li id={1} onClick={(e) => { alert(e.target.id + ' clicked'); console.log(e.target); } }>
-                                    <span id={1}>Pineapple, raw</span>
-                                        <DeleteOutlinedIcon id='trashcan' className='icon'></DeleteOutlinedIcon>
-                                    </li>
-                                <li onClick={(e) => { alert(e.target.id + ' clicked'); console.log(e.target); }}>
-                                    <span id={2}>Jackfruit, raw</span>
-                                        <DeleteOutlinedIcon className='icon'></DeleteOutlinedIcon>
-                                    </li>
-                                <li onClick={(e) => { alert(e.target.id + ' clicked'); console.log(e.target); }}>
-                                    <span id={3}>Chicken, roasted</span>
-                                        <DeleteOutlinedIcon className='icon'></DeleteOutlinedIcon>
-                                    </li>
-                                    <li>
-                                    <span id={4}>Avocado, raw</span>
-                                        <DeleteOutlinedIcon className='icon'></DeleteOutlinedIcon>
-                                    </li>
-                                    <li>
-                                        <span>Coffee, black</span>
-                                        <DeleteOutlinedIcon className='icon'></DeleteOutlinedIcon>
-                                    </li>
-                                    <li>
-                                        <span>Rice, White, cooked</span>
-                                        <DeleteOutlinedIcon className='icon'></DeleteOutlinedIcon>
-                                    </li>
-                                <li>
-                                    <span>Bread, mountain, whole wheat</span>
-                                    <DeleteOutlinedIcon className='icon'></DeleteOutlinedIcon>
+                                <li id={1} onClick={(e) => { alert(e.target.id + ' clicked'); console.log(e.target); }}>
+                                    <span id={1}>Fruit of the Jack, raw</span>
+                                        <DeleteOutlinedIcon id='trashcan1' className='icon'></DeleteOutlinedIcon>
                                 </li>
-                                <li>
-                                    <span>Spinach, raw</span>
-                                    <DeleteOutlinedIcon className='icon'></DeleteOutlinedIcon>
+                                <li id={2} onClick={(e) => { alert(e.target.id + ' clicked'); console.log(e.target); }}>
+                                    <span id={2}>Jackfruit, raw</span>
+                                    <DeleteOutlinedIcon id='trashcan2' className='icon'></DeleteOutlinedIcon>
                                 </li>
                             </ul>
                         </div>
