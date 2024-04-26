@@ -13,25 +13,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import http from '../../http-common.js';
-import { useState, useEffect, forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const Widget = ({ type, post }) => {
+const Widget = ({ type }) => {
     const [open, setOpen] = useState(false);
     const [like, setLike] = useState(false);
-    const [postData, setPostData] = useState(null);
 
-    useEffect(() => {
-        if (post != null) {
-            http.post('/Post/getbyid', { post_id: post }).then((response) => {
-                setPostData(response.data);
-            });
-        }
-    }, []);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -48,16 +39,16 @@ const Widget = ({ type, post }) => {
     let data;
 
     switch (type) {
-        case 'friend':
-            data = {
-                title: 'FRIEND POST',
-                link: 'username', //this should changes
-                icon: <PersonIcon className='icon' style={{ color: "#5F42CC", backgroundColor: "transparent" }}></PersonIcon>,
-                message: 'title' // this should change
-            };
-            console.log(postData);
+        case 'friend': {
+                data = {
+                    title: 'FRIEND POST',
+                    link: '/users/'+localStorage.getItem('username'), //this should changes
+                    icon: <PersonIcon className='icon' style={{ color: "#5F42CC", backgroundColor: "transparent" }}></PersonIcon>,
+                    message: {  } // this should change
+                };
+            }
+        
             break;
-
         case 'none':
             data = {
                 title: 'NO NEW POSTS',
@@ -93,13 +84,13 @@ const Widget = ({ type, post }) => {
                 keepMounted
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle style={{ padding: '20px 0px 10px 0px', textAlign:'center'} }>{'title'}</DialogTitle>
+                <DialogTitle style={{ padding: '20px 0px 10px 0px', textAlign:'center'} }>Theres a bug</DialogTitle>
                 <DialogContent>
                     <DialogContentText style={{ margin: '-2px 0px 10px 0px' }}>
-                        <p style={{ textAlign: 'justify' }}>{'description'}</p>
+                        <p style={{ textAlign: 'justify' }}>Theres a bug</p>
                     </DialogContentText>
                     <DialogContentText style={{ color: '#5F42CC' } }>
-                        <p>{' -- '+'username'}</p>
+                        <p>{' -- ' + localStorage.getItem('username')}</p>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

@@ -77,7 +77,7 @@ namespace MacroPhager.Server.Controllers
             var u = new SqlParameter("username", requestinfo.username);
             //var e = new SqlParameter("earliest", requestinfo.earliest);
             //var l = new SqlParameter("latest", requestinfo.latest);
-            var early = DateTime.Parse("2024-04-26 12:00:00.0000000");
+            var early = DateTime.Parse("2024-04-27 12:00:00.0000000");
             var latest = DateTime.Parse("2024-03-26 12:00:00.0000000");
             var e = new SqlParameter("earliest", early);
             var l = new SqlParameter("latest", latest);

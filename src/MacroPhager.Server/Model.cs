@@ -73,12 +73,15 @@ namespace MacroPhager.Server
     public class Friend
     {
         [Key]
+        public string friendship_id { get; set; }
+
+        [Required, StringLength(100, MinimumLength = 3)]
         public string username { get; set; }
 
         [JsonIgnore, ForeignKey("username")]
         public Account Account { get; set; }
 
-        [Required, StringLength(100, MinimumLength = 3)]
+        [StringLength(100, MinimumLength = 3)]
         public string friend_username { get; set; }
         // EFC prevents FK to self. TODO: Add Validator for this column.
         // Bandaid Fix: Check needed during Insert/Deletes. 

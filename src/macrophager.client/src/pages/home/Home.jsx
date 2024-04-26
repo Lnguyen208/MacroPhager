@@ -22,7 +22,7 @@ const Home = () => {
     };
     
     // Pass in the entire response POST object.
-    const [fourposts, setfourposts] = useState(null);
+    const [fourposts, setfourposts] = useState([]);
 
     useEffect(() => {
         http.post('/Post/getrecent', { username: localStorage.getItem('username') }, {
@@ -33,10 +33,8 @@ const Home = () => {
             var postObjects = response.data;
             //console.log(postObjects);
             //console.log(length);
-            const widgetPostIds = [];
 
-            postObjects.forEach((p) => { widgetPostIds.push(p.post_id); console.log(p.post_id); });
-            setfourposts(widgetPostIds);
+            setfourposts(postObjects);
 
         }).catch(function (error) {
             if (error.response) {
@@ -58,13 +56,10 @@ const Home = () => {
         <div className='Home'>
             <Sidebar></Sidebar>
             <div className='homeContainer'>
-                <Navbar></Navbar>
-                {fourposts != null ? (<div className='widgets'>
-                    <Widget type= 'friend' post={fourposts[0]}></Widget>
-                    <Widget type='friend' post={fourposts[1]}></Widget>
-                    <Widget type='friend' post={fourposts[2]}></Widget>
-                    <Widget type='friend' post={fourposts[3]}></Widget>
-                </div>): null }
+                <Navbar></Navbar><div className='widgets'>
+                    
+                    
+                    </div>
                 <div className='stats'>
                     <div className='carousel'>
                         <Carousel

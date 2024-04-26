@@ -2,23 +2,15 @@
 export const userColumns = [
     { field: 'id', headerName: 'ID', width: 70 },
     {
-        field: 'username', headerName: 'Username', width: 230, renderCell: (params)=>{
+        field: 'friend_name', headerName: 'Username', width: 230, renderCell: (params)=>{
             return (
                 <div className='cellwithimage'>
-                    <img className='cellimage' src={params.row.img} alt=''></img>
-                    {params.row.username}
+                    <img className='cellimage' src={'data:'.concat(params.row.img_type).concat(';base64,').concat(params.row.friend_pfp)} alt=''></img>
+                    {params.row.friend_name}
                 </div>)
         }
     },
-    { field: 'email', headerName: 'Email', width: 230 },
-    { field: 'age', headerName: 'Age', width: 100 },
-    {
-        field: 'status', headerName: 'Status', width: 160, renderCell: (params) => {
-            return (
-                <div className={`cellwithstatus ${params.row.status}`}>{params.row.status}</div>
-            )
-        }
-    }
+    { field: 'friend_email', headerName: 'Email', width: 230 },
 ];
 
 export const userRows = [

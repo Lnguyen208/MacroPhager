@@ -21,11 +21,14 @@ const DataTable = () => {
     useEffect(() => {
         // fetch should return all of user's friends
         // for now, store user's username in local storage unless you have time for a middlewhere...
-        http.post('/users/getFriends', {
+        http.post('/Account/friendlist', { username: localStorage.getItem('username') }, {
             signal: AbortSignal.timeout(10000),
         }).then((response) => {
             console.log(response);
             setIncomingData(response.data);
+            for (var i = 0; i < response.data.length; i++){
+                localStorage.setItem(i + '', response.data[i].friend_name);
+            }
         }).catch(function (error) {
             if (error.response) {
                 // The request was made and the server responded with a status code
@@ -44,10 +47,12 @@ const DataTable = () => {
             }
             console.log(error.config);
         });
+    }, []);
 
-        setIncomingData(userRows);
+    const addFriend = (e) => {
+        console.log(e);
+    }
 
-    },[]);
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -57,7 +62,10 @@ const DataTable = () => {
     };
 
     const handleDelete = (id) => {
+        var item = incomingData[id]; console.log(item);
         setIncomingData(incomingData.filter(item => item.id !== id));
+        
+        http.post('Account/removefriend', { username: localStorage.getItem('username'), friend_username: localStorage.getItem(id+'') },).then((response) => { console.log(response); });
     }
 
     const actionColumn = [
@@ -65,7 +73,7 @@ const DataTable = () => {
             field: 'action', headerName: 'Action', width: 200, renderCell: (params) => {
                 return (
                     <div className='cellAction'>
-                        <Link to='/users/friendsUsername' style={{ textDecoration: 'none' }}>
+                        <Link to='/users/pallascat' style={{ textDecoration: 'none' }}>
                             <div className='viewButton'>View</div>
                         </Link>
                         <div className='deleteButton' onClick={() => { handleDelete(params.row.id) }}>Delete</div>
@@ -106,8 +114,9 @@ const DataTable = () => {
                             const formData = new FormData(event.currentTarget);
                             const formJson = Object.fromEntries(formData.entries());
                             console.log(formJson);
-                            const username = formJson.username;
-                            console.log(username);
+                            const friend = formJson.username;
+                            console.log(friend);
+                            http.post('Account/addfriend', { username: localStorage.getItem('username'), friend_username: friend }).then((response) => { alert(response.data); })
                             handleClose();
                         },
                     }}
@@ -131,7 +140,7 @@ const DataTable = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button style={{ marginBottom: '10px' }} onClick={handleClose} variant='outlined' size='medium'>Cancel</Button>
-                        <Button style={{ marginBottom: '10px', marginRight: '10px' }} type="submit" variant='contained' size='medium'>Submit</Button>
+                            <Button style={{ marginBottom: '10px', marginRight: '10px' }} onClick={addFriend} type="submit" variant='contained' size='medium'>Submit</Button>
                     </DialogActions>
                 </Dialog>
             </div>)

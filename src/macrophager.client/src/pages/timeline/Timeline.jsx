@@ -5,10 +5,9 @@ import Navbar from '../../components/navbar/Navbar';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import CircularProgress from '@mui/material/CircularProgress';
 import http from '../../http-common.js';
 import { useState, useEffect } from 'react';
-import defaultPfp from '../../assets/default-pfp.jpg';
+import { Link } from 'react-router-dom';
 
 const Timeline = () => {
 
@@ -52,11 +51,14 @@ const Timeline = () => {
                         className="vertical-timeline-element--work"
                         contentStyle={{ background: '#E8E2FF', color: 'black' }}
                         contentArrowStyle={{ borderRight: '7px solid  #E8E2FF' }}
-                        date={item.time_stamp.substring(0, 9)}
+                        date={item.time_stamp.substring(0, 19)}
                         icon={<img className='friendImg' src={'data:'.concat(item.img_type).concat(';base64,').concat(item.poster_picture)} alt=''></img>}
                     >
                         <h3 className="vertical-timeline-element-title">{item.title}</h3>
-                        <h4 className="vertical-timeline-element-subtitle">{item.posted_by}</h4>
+                        <Link to={'/users/'+item.posted_by} state={{ username: item.posted_by }}>
+                            <h4 className="vertical-timeline-element-subtitle" style={{ margin: '5px 0px -10px 0px', color: '#3d1fad' }}>{item.posted_by}</h4>
+                        </Link>
+                        
                         <p>
                             {item.description}
                         </p>

@@ -104,20 +104,25 @@ namespace MacroPhager.Server.Controllers
             try
             {
                 var u = new SqlParameter("username", userRequest.username);
-                var friendList = _macrophagercontext.Set<Account>().FromSqlRaw($"SELECT [friend_username] FROM [Accounts] INNER JOIN [Friends] ON Accounts.username = Friends.username WHERE Accounts.username = @username", u);
+                var friendList = _macrophagercontext.Set<Friend>().FromSqlRaw($"SELECT * FROM [Friends] WHERE [Friends].username = @username", u).ToList();
                 var friendpfp = new List<FriendList>();
+                var count = 0;
 
-                await friendList.ForEachAsync((f) =>
+                friendList.ForEach((f) =>
                 {
-                    var friend = new SqlParameter("friend", f.username);
-                    var pfp = _macrophagercontext.Set<Account>().FromSqlRaw($"SELECT * FROM [Accounts] WHERE username = @friend", friend);
+                    var friend = new SqlParameter("friend", f.friend_username);
+                    var pfp = _macrophagercontext.Set<Account>().FromSqlRaw($"SELECT * FROM [Accounts] WHERE username = @friend", friend).ToList();
                     friendpfp.Add(new FriendList()
                     {
-                        friend_name = f.username,
+                        id = count,
+                        friend_name = pfp.First().username,
                         friend_pfp = pfp.First().profile_picture,
-                    });
+                        friend_email = pfp.First().email,
+                        img_type = pfp.First().img_type,
+                    }); ;
+                    count++;
                 });
-                return Ok(friendList);
+                return Ok(friendpfp);
             }
             catch (Exception ex) { return BadRequest("internal error"); }
         }
@@ -130,6 +135,7 @@ namespace MacroPhager.Server.Controllers
             {
                 _macrophagercontext.Set<Friend>().Add(new Friend()
                 {
+                    friendship_id = Guid.NewGuid().ToString(),
                     username = userRequest.username,
                     friend_username = userRequest.friend_username,
                 });
@@ -137,6 +143,23 @@ namespace MacroPhager.Server.Controllers
 
                 return Ok(userRequest.friend_username+" has been added.");
             } catch(Exception ex) { return BadRequest("internal error"); }
+        }
+
+        // Return user's list of friends pfp and username 
+        [HttpPost("removefriend")]
+        public async Task<IActionResult> RemoveFriend(UserRequest userRequest)
+        {
+            try
+            {
+                var u = new SqlParameter("username", userRequest.username);
+                var f = new SqlParameter("friend", userRequest.friend_username);
+                var query = _macrophagercontext.Set<Friend>().FromSqlRaw($"SELECT * FROM [Friends] WHERE username = @username AND friend_username = @friend", u, f).First();
+                _macrophagercontext.Set<Friend>().Remove(query);
+                await _macrophagercontext.SaveChangesAsync();
+
+                return Ok(userRequest.friend_username + " has been removed.");
+            }
+            catch (Exception ex) { return BadRequest("internal error"); }
         }
     }
 }
