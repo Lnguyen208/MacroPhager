@@ -31,7 +31,7 @@ namespace MacroPhager.Server.Controllers
             var newAcccount = new Account
             {
 
-            }
+            };
             var imgFile = imageFile;
             return Ok("aye");
         }

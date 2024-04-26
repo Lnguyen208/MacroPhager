@@ -1,6 +1,5 @@
 import './Navbar.scss';
 import SearchIcon from '@mui/icons-material/Search';
-import LanguageIcon from '@mui/icons-material/Language';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
@@ -10,7 +9,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-    const { darkMode, dispatch } = useContext(DarkModeContext);
+    const { dispatch } = useContext(DarkModeContext);
 
     return (
         <div className='Navbar'>

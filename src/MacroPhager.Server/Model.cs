@@ -72,7 +72,7 @@ namespace MacroPhager.Server
     // Friend list is tied to account, thus use PK of Account
     public class Friend
     {
-        [Key, Required, StringLength(100, MinimumLength = 3)]
+        [Key]
         public string username { get; set; }
 
         [JsonIgnore, ForeignKey("username")]
@@ -89,11 +89,11 @@ namespace MacroPhager.Server
 
     public class FoodItem
     {
-        [Key, Required, StringLength(36, MinimumLength = 36)]
+        [Key]
         public string food_id { get; set; } // GUID
 
         [Required, StringLength(100, MinimumLength = 3)]
-        public string created_by { get; set } // User's Personal Food Repo. Items are only owned by the user.
+        public string created_by { get; set; } // User's Personal Food Repo. Items are only owned by the user.
 
         [JsonIgnore, ForeignKey("created_by")]
         public Account Account { get; set; }
@@ -127,10 +127,10 @@ namespace MacroPhager.Server
 
     public class DailyLog
     {
-        [Key, Required, StringLength(36, MinimumLength = 36)]
+        [Key]
         public string log_id { get; set; } // GUID
 
-        [Required, JsonIgnore, StringLength(36, MinimumLength = 36)]
+        [Required, StringLength(100, MinimumLength = 3)]
         public string username { get; set; }
 
         [JsonIgnore, ForeignKey("username")]
@@ -145,10 +145,10 @@ namespace MacroPhager.Server
 
     public class LoggedFood
     {
-        [Required, StringLength(36, MinimumLength = 36)]
+        [Key]
         public string logged_food_id { get; set; }
 
-        [Required, StringLength(36, MinimumLength = 36)]
+        [Required]
         public string log_id { get; set; }
 
         [JsonIgnore, ForeignKey("log_id")]
@@ -156,8 +156,9 @@ namespace MacroPhager.Server
 
         // cannot guarentee unique because of business rules:
         // User should be able to log 2 instances of the same food item on the same day
-        [Required, JsonIgnore, StringLength(36, MinimumLength = 36)]
-        public string food_id { get; set; }
+
+        public string? food_id { get; set; } // Refer to MealFood. The only way user can cause this to be null is if the user deletes the item themselves
+                                            // IF user deletes item, need front end confirmation that it will remove the food from all Daily Logs as well
 
         [JsonIgnore, ForeignKey("food_id")]
         public FoodItem FoodItem { get; set; }
@@ -169,10 +170,10 @@ namespace MacroPhager.Server
     
     public class Meal
     {
-        [Key, Required, StringLength(36, MinimumLength = 36)]
+        [Key]
         public string meal_id { get; set; }
 
-        [Required, JsonIgnore, StringLength(36, MinimumLength = 36)]
+        [Required, StringLength(100, MinimumLength = 3)]
         public string created_by { get; set; }
 
         [JsonIgnore, ForeignKey("created_by")]
@@ -189,17 +190,16 @@ namespace MacroPhager.Server
     public class MealFood
     {
         // Refer to LoggedFood Business Rules.
-        [Key, Required, StringLength(36, MinimumLength = 36)]
-        public int meal_food_id { get; } 
+        [Key]
+        public string meal_food_id { get; set; } 
 
-        [Required, StringLength(36, MinimumLength = 36)]
+        [Required]
         public string meal_id { get; set; }
 
         [JsonIgnore, ForeignKey("meal_id")]
         public Meal Meal { get; set; }
 
-        [Required, JsonIgnore, StringLength(36, MinimumLength = 36)]
-        public string food_id { get; set; }
+        public string? food_id { get; set; } // Need Validation to remove these entries manually if this column is found null. Null will not affect UX though.
 
         [JsonIgnore, ForeignKey("food_id")]
         public FoodItem FoodItem { get; set; }
@@ -211,7 +211,7 @@ namespace MacroPhager.Server
     // Timeline logic is handled by bach end and front end logic. Only Needs this post table to get needed info.
     public class Post
     {
-        [Key, Required, StringLength(36, MinimumLength = 36)]
+        [Key]
         public string post_id { get; set; }
 
         [Required, StringLength(50, MinimumLength = 10)]
@@ -220,7 +220,7 @@ namespace MacroPhager.Server
         [Required, StringLength(500, MinimumLength = 10)]
         public string description { get; set; }
 
-        [Required, JsonIgnore, StringLength(36, MinimumLength = 36)]
+        [Required, StringLength(100, MinimumLength = 3)]
         public string posted_by { get; set; }
 
         [JsonIgnore, ForeignKey("posted_by")]

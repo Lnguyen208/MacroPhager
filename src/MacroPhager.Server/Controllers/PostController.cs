@@ -54,7 +54,7 @@ namespace MacroPhager.Server.Controllers
         }
 
         [HttpPost("getbydate")]
-        public async Task<IActionResult> GetByDate(string dateStart, string dateEnd string? frinedID)
+        public async Task<IActionResult> GetByDate(string dateStart, string dateEnd, string? frinedID)
         {
             // 1) same as GetRecentPosts() but retrieves all posts from start - end date
             // 2) optional friendID to only query for specific friend.
