@@ -17,34 +17,22 @@ namespace MacroPhager.Server.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(Registration registration)
+        public async Task<IActionResult> Register(IFormFile imageFile, IFormCollection data)
         {
-            var username = new SqlParameter("username", registration.username);
-            // check if username exists
+            // data being sent should have following parameters:
+            // username, first_name, last_name, email, password, macro_goals, tdee, img_type
+
+            // 1 :: Check if username is taken
+            var username = new SqlParameter("username", data["username"]);
             var existingUsername = _macrophagercontext.Set<Account>().FromSqlRaw($"SELECT * FROM [Account] WHERE username = @username", username);
             if (existingUsername.First() != null) { return BadRequest("Username has already been taken."); }
 
-            var newUser = new User
+            // 2 :: Add New Account to DB
+            var newAcccount = new Account
             {
-                user_id = Guid.NewGuid().ToString(),
-                first_name = registration.first_name,
-                last_name = registration.last_name,
-                macro_goal = registration.macro_goal,
-                tdee = registration.tdee,
-            };
-            _macrophagercontext.Add(newUser);
 
-            var newAccount = new Account
-            {
-                username = registration.username,
-                email = registration.email,
-                password = registration.password,
-                acct_type = AccountType.Free,
-                user_id = newUser.user_id,
-            };
-            _macrophagercontext.Add(newAccount);
-            _macrophagercontext.SaveChanges();
-
+            }
+            var imgFile = imageFile;
             return Ok("aye");
         }
 
@@ -57,10 +45,23 @@ namespace MacroPhager.Server.Controllers
             var verification = _macrophagercontext.Set<Account>().FromSqlRaw($"SELECT * FROM [Account] WHERE username = @username AND password = @password", username, password);
             if (verification.First() == null) return BadRequest("Incorrect Login Credentials");
 
-            // Need to add Account object to HTTPContext
-            // Prob need to also return information enough for the user's dashboard? (Current Nutritional Calories and Macros, Timeline, User Profile)
-            // the front end components should make the call to endpoints
-            return Ok("Login Credentials are correct.");
+            return Ok(verification.First()); // Since there is no middleware atm for authentication, returning user's info for now.
+        }
+
+        [HttpPost("userprofile")]
+        public async Task<IActionResult> GetUserProfile(string username)
+        {
+            // This is for the user profile area.
+            // Complicated Part: Profile Picture?
+            // THIS IS UNIVERSAL API for getting BOTH user and friend's profiles
+            return Ok("sadge");
+        }
+
+        [HttpPost("friendlist")]
+        public async Task<IActionResult> GetFriendList(string username)
+        {
+            // same vein of complicated as profile_picture
+            return Ok("sadge");
         }
     }
 }

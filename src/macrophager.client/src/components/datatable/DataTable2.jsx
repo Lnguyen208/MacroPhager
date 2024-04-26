@@ -89,10 +89,13 @@ const DataTable = () => {
         ) : (
             <div className='DataTable'>
                 <div className='DataTableTitle'>
-                    My Daily Log
-                     <Link to='/foodlog/new' style={{ textDecoration: 'none' }} className='link'>
-                            Make New Food Item or Meal
-                     </Link>
+                        My Daily Log
+                        <div className='buttonarea'>
+                            <div className='logfoodbutton'>Log a Food Item</div>
+                            <Link to='/foodlog/new' style={{ textDecoration: 'none' }} className='link'>
+                                Make a New Food Item
+                            </Link>
+                        </div>
                 </div>
                 <DataGrid
                     className='datagridtable'
@@ -106,10 +109,22 @@ const DataTable = () => {
                     pageSizeOptions={[10, 25, 50]}
                     checkboxSelection
                     />
-                    <div className='stats'>
-                        <div className='macrodistr'>
-                            <PiChart title='Current Macro Distribution'></PiChart>
+                    <div className='bottom'>
+                        <div className='stats'>
+                            <div className='statsTitle'>Total Macronutrients</div>
+                            <div className='macrodistr'>
+                                <div className='calories'>Calories: </div>
+                                <span>1000</span>
+                                <div className='fats'>Fats: </div>
+                                <span>10</span>
+                                <div className='carbs'>Carbs: </div>
+                                <span>40</span>
+                                <div className='proteins'>Proteins:</div>
+                                <span>24</span>
+                            </div>
                         </div>
+
+   
                     </div>
 
                 <Dialog

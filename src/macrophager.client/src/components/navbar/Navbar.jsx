@@ -4,7 +4,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import ChecklistIcon from '@mui/icons-material/Checklist';
+
 import { DarkModeContext } from '../../context/darkModeContext';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
@@ -20,10 +20,6 @@ const Navbar = () => {
                     <SearchIcon></SearchIcon>
                 </div>
                 <div className='items'>
-                    <div className='item'>
-                        <LanguageIcon className='icon'></LanguageIcon>
-                        &nbsp;English
-                    </div>
                     <div className='item'>
                         <DarkModeIcon className='icon' onClick={() => dispatch({ type: 'TOGGLE' })}></DarkModeIcon>
                     </div>

@@ -2,18 +2,58 @@
     padding: 20px;
     display: grid;
 
-    .stats {
+    .bottom {
         display: flex;
-        margin-top: 10px;
+        justify-content: flex-start;
 
-        .macrodistr {
+        .stats {
+            margin-top: 10px;
             padding: 5px 0px 20px 0px;
-            min-width: 300px;
-            max-width: 300px;
-            min-height: 370px;
             -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
             box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
             border-radius: 5px;
+            max-width: 420px;
+            min-width: 420px;
+
+            .statsTitle {
+                margin-top: 10px;
+                margin-left: 20px;
+                font-size: 18px;
+                color: gray;
+            }
+
+            .macrodistr {
+                margin-top: 15px;
+                margin-left: 20px;
+                display: flex;
+                justify-content: flex-start;
+                gap: 10px;
+                font-size: 16px;
+
+                span {
+                    color: #444444;
+                }
+
+                .calories {
+                    font-weight: bold;
+                    color: #444444;
+                }
+
+                .fats {
+                    font-weight: bold;
+                    color: #5F42CC;
+                }
+
+                .carbs {
+                    font-weight: bold;
+                    color: #37B874;
+                }
+
+                .proteins {
+                    font-weight: bold;
+                    color: #1D73C1;
+                }
+            }
         }
     }
 
@@ -26,25 +66,42 @@
         align-items: center;
         justify-content: space-between;
 
-        .link {
-            text-decoration: none;
-            color: green;
-            font-size: 16px;
-            font-weight: 400;
-            border: 1px solid green;
-            padding: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+        .buttonarea {
+            display: flex;
+            gap: 10px;
 
-        .newFriendButton {
-            color: green;
-            font-size: 16px;
-            font-weight: 400;
-            border: 1px solid green;
-            padding: 5px;
-            border-radius: 5px;
-            cursor: pointer;
+            .logfoodbutton {
+                color: #5F42CC;
+                font-size: 16px;
+                font-weight: 400;
+                border: 1px solid #5F42CC;
+                padding: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+                text-align: center;
+            }
+
+            .link {
+                text-decoration: none;
+                color: green;
+                font-size: 16px;
+                font-weight: 400;
+                border: 1px solid green;
+                padding: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+                text-align: center;
+            }
+
+            .newFriendButton {
+                color: green;
+                font-size: 16px;
+                font-weight: 400;
+                border: 1px solid green;
+                padding: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
         }
     }
 

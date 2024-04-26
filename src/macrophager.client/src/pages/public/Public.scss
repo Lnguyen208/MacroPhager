@@ -1,0 +1,53 @@
+.Public {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+
+    .publicContainer {
+        flex: 6;
+        $bg-img: url('../../assets/main-page.jpg');
+        background-image: $bg-img;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        .publicPage {
+            display: flex;
+            justify-content: center;
+
+            .temporary {
+                -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+                box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+                padding: 25px;
+                margin: 5%;
+                display: grid;
+                background-color: rgba(255, 255, 255, 0.8);
+                display: flex;
+                flex-direction: column;
+                max-width: 600px;
+                max-height: 500px;
+                border-radius: 5px;
+
+                .title {
+                    font-size: 22px;
+                    margin-top: 0px;
+                    color: #4b29cf;
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .description {
+                    color: #222222;
+                    text-align: center;
+                    margin: 15px;
+                    font-size: 20px;
+
+                    &.quote {
+                        color: #7451F8;
+                        margin: 10px 30px 10px 30px;
+                    }
+                }
+            }
+        }
+    }
+}

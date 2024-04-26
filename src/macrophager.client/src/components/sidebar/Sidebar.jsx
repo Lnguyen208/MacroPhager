@@ -72,8 +72,10 @@ const Sidebar = () => {
                         <span>Setting</span>
                     </li>
                     <li>
-                        <LogoutIcon className='icon'></LogoutIcon>
-                        <span>Logout</span>
+                        <Link to={'/login'} style={{ textDecoration: 'none' }}>
+                            <LogoutIcon className='icon'></LogoutIcon>
+                            <span>Logout</span>
+                        </Link>
                     </li>
                 </ul>
             </div>

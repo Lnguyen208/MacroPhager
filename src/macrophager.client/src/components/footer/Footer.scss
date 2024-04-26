@@ -1,0 +1,21 @@
+.Footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    color: snow;
+    background-color: #7451f8;
+
+    .footerTitle {
+        margin-top: 10px;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .icon{
+        font-size: 12px;
+        margin-top: 2.5px;
+    }
+}

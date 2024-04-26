@@ -5,9 +5,12 @@ import Home from './pages/home/Home';
 import List from './pages/list/List';
 import Single from './pages/single/Single';
 import New from './pages/new/New';
+import New2 from './pages/new/New2';
+import Public from './pages/public/Public';
+
 import Timeline from './pages/timeline/Timeline';
 import Meals from './pages/meals/Meals';
-import { userInputs, productInputs } from './placeholders/FormSource';
+
 import './styles/dark.scss';
 import { DarkModeContext } from './context/darkModeContext';
 import { useContext } from 'react';
@@ -21,10 +24,11 @@ function App() {
                     <Route path='/'></Route>
                         <Route index element={<Home></Home>}></Route>
                     <Route path='login' element={<Login></Login>}></Route>
-                    <Route path='register' element={<New inputs={userInputs} title='New User Registration' itemType='user'></New>}></Route>
+                    <Route path='register' element={<New></New>}></Route>
+                    <Route path='mainpage' element={<Public></Public> }></Route>
                     <Route path='foodlog'>
                         <Route index element={<List type='Daily Log'></List>}></Route>
-                        <Route path='new' element={<New inputs={productInputs} title='Add New Food Item or Meal' itemType='food'></New>}></Route>
+                        <Route path='new' element={<New2></New2>}></Route>
                         <Route path='meals' element={<Meals></Meals>}></Route>
                     </Route>
                     <Route path='friends'>

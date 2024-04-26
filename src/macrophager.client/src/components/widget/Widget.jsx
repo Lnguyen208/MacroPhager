@@ -98,9 +98,7 @@ const Widget = ({ type }) => {
                         <p>username</p>
                     </DialogContentText>
                     <DialogContentText>
-                        <p> Kura just opened near my house and I ate sooo much sushi! It was fun, but I definitely overdid it and ate like 3000 calories lol.
-                            Kura just opened near my house and I ate sooo much sushi! It was fun, but I definitely overdid it and ate like 3000 calories lol.
-                            Kura just opened near my house and I ate sooo much sushi! It was fun, but I definitely overdid it and ate like 3000 calories lol.
+                        <p style={{ textAlign: 'justify'}}> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop p
                         </p>
                     </DialogContentText>
                 </DialogContent>
@@ -109,7 +107,7 @@ const Widget = ({ type }) => {
                         {like ? <FavoriteIcon style={{ fontSize: '25px' }}></FavoriteIcon> :
                             <FavoriteBorderOutlinedIcon style={{ fontSize: '25px' }}></FavoriteBorderOutlinedIcon>}
                     </Button>
-                    <Button style={{ marginBottom: '10px' }} onClick={handleClose} variant='outlined' size='medium'>Close</Button>
+                    <Button style={{ margin: '0px 10px 10px 10px' }} onClick={handleClose} variant='outlined' size='medium'>Close</Button>
                 </DialogActions>
             </Dialog>
         </div>
