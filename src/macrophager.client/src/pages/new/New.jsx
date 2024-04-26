@@ -6,11 +6,12 @@ import { useState } from 'react';
 import http from '../../http-common.js';
 import defaultProfileImg from '../../assets/default-pfp.jpg'
 import { userInputs } from '../../placeholders/FormSource';
-
+import { useNavigate } from 'react-router-dom';
 const New = () => {
     const inputs = userInputs;
     const title = 'New User Registration'
     const [file, setFile] = useState('');
+    const navigate = useNavigate();
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
@@ -30,15 +31,29 @@ const New = () => {
                     formData.append('tdee', e.target[9].value);
                     formData.append('img_type', e.target[0].files[0].type)
                     formData.append('imageFile', payloadImg);
-                    for (const pair of formData.entries()) {
-                        console.log(pair[0], pair[1]);
-                    }
+                    //for (const pair of formData.entries()) {
+                    //    console.log(pair[0], pair[1]);
+                    //}
                 http.post('/Account/register', formData, {
                     signal: AbortSignal.timeout(100000),
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
-                }).then((response) => { console.log(response); }).catch(function (error) {
+                }).then((response) => {
+                    //console.log(response);
+                    // should replace this with indexdb
+                    localStorage.setItem('email', response.data.email);
+                    localStorage.setItem('first_name', response.data.first_name);
+                    localStorage.setItem('img_type', response.data.img_type);
+                    localStorage.setItem('last_name', response.data.last_name);
+                    localStorage.setItem('macro_goal', response.data.macro_goal);
+                    localStorage.setItem('tdee', response.data.tdee);
+                    localStorage.setItem('username', response.data.username);
+                    localStorage.setItem('profile_picture', response.data.profile_picture);
+
+                    navigate('/dashboard');
+
+                }).catch(function (error) {
                     if (error.response) {
                         // The request was made and the server responded with a status code
                         // that falls out of the range of 2xx

@@ -8,7 +8,7 @@ const PublicNavbar = () => {
     return (
         <div className='PublicNavbar'>
             <div className='wrapper'>
-                <Link to='/mainpage' style={{ textDecoration: 'none' }}>
+                <Link to='/' style={{ textDecoration: 'none' }}>
                     <span className='logo'>
                         MacroPhager
                     </span>

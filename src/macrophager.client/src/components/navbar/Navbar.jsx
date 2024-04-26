@@ -10,7 +10,10 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const { dispatch } = useContext(DarkModeContext);
-
+    const imagetype = localStorage.getItem('img_type');
+    const imgdata = localStorage.getItem('profile_picture');
+    const imgSrc = 'data:'.concat(imagetype).concat(';base64,').concat(imgdata);
+    const username = localStorage.getItem('username');
     return (
         <div className='Navbar'>
             <div className='wrapper'>
@@ -30,9 +33,9 @@ const Navbar = () => {
                         <ChatBubbleOutlineIcon className='icon'></ChatBubbleOutlineIcon>
                         <div className='counter'>2</div>
                     </div>
-                    <Link to='/users/12345' style={{ textDecoration: 'none' }}>
+                    <Link to={'/users/' + username} state={{ username: username }} style={{ textDecoration: 'none' }}>
                         <div className='item'>
-                            <img src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt='' className='avatar'></img>
+                            <img src={imgSrc} alt='' className='avatar'></img>
                         </div>
                     </Link>
                 </div>

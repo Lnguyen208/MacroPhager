@@ -10,16 +10,16 @@ import ForumIcon from '@mui/icons-material/Forum';
 
 import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../../context/darkModeContext';
-import {useContext} from 'react';
+import { useContext } from 'react';
 
 const Sidebar = () => {
     const { darkMode, dispatch } = useContext(DarkModeContext);
-    localStorage.setItem('username', 'pallaspoop2024');
+    const username = localStorage.getItem('username');
 
     return (
         <div className='Sidebar'>
             <div className='top'>
-                <Link to='/' style={{ textDecoration:'none' } }>
+                <Link to='/dashboard' style={{ textDecoration:'none' } }>
                     <span className='logo'>MacroPhager</span>
                 </Link>
             </div>
@@ -27,7 +27,7 @@ const Sidebar = () => {
             <div className='center'>
                 <ul>
                     <p className='title'>MAIN</p>
-                    <Link to='/' style={{ textDecoration: 'none' }}>
+                    <Link to='/dashboard' style={{ textDecoration: 'none' }}>
                         <li>
                             <DashboardIcon className='icon'></DashboardIcon>
                             <span>Dashboard</span>
@@ -61,7 +61,7 @@ const Sidebar = () => {
                     </Link>
 
                     <p className='title'>USER</p>
-                    <Link to={'/users/'+localStorage.getItem('username')} style={{ textDecoration: 'none' }}>
+                    <Link to={'/users/' + username} state={{ username: username}} style={{ textDecoration: 'none' }}>
                         <li>
                             <AccountBoxIcon className='icon'></AccountBoxIcon>
                             <span>Profile</span>

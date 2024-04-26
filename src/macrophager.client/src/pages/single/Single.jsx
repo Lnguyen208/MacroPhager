@@ -4,15 +4,25 @@ import './Single.scss';
 import Navbar from '../../components/navbar/Navbar';
 import Chart from '../../components/chart/Chart';
 import TheTable from '../../components/table/TheTable';
+import { useLocation } from 'react-router-dom';
 
 const Single = () => {
+    const location = useLocation();
+    const { username } = location.state;
+
+    console.log(username);
+
+    const splitMacros = localStorage.getItem('macro_goal').split('%');
     let placeholder = {
-        first_name: 'Pallas',
-        last_name: 'Poop',
-        email: 'PallasPoop@gmail.com',
-        macros: { fat: 30, carbs: 50, protein: 20 },
-        tdee: 2000,
+        first_name: localStorage.getItem('first_name'),
+        last_name: localStorage.getItem('last_name'),
+        email: localStorage.getItem('email'),
+        macros: { fat: parseFloat(splitMacros[0]), carbs: parseFloat(splitMacros[1]), protein: parseFloat(splitMacros[2]) },
+        tdee: parseFloat(localStorage.getItem('tdee')),
     }
+    const imagetype = localStorage.getItem('img_type');
+    const imgdata = localStorage.getItem('profile_picture');
+
     return (
         <div className='Single'>
             <Sidebar></Sidebar>
@@ -23,7 +33,7 @@ const Single = () => {
                     <div className='editButton'>Edit</div>
                         <h1 className='title'>User Information</h1>
                         <div className='item'>
-                            <img src='https://c8.alamy.com/comp/2AY7D9H/a-domestic-medium-haired-cat-with-brown-tabby-markings-and-green-eyes-2AY7D9H.jpg' alt='' className='itemImage'></img>
+                            <img src={`data:${imagetype};base64,${imgdata}`} alt='' className='itemImage'></img>
                             <div className='details'>
                                 <h1 className='itemTitle'>{ placeholder.first_name + ' ' + placeholder.last_name }</h1>
                                 <div className='detailItem'>

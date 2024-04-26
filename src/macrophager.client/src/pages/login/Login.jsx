@@ -3,12 +3,13 @@ import './Login.scss';
 import Footer from '../../components/footer/Footer';
 import PublicNavbar from '../../components/navbar/PublicNavbar';
 import http from '../../http-common.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    localStorage.clear();
     const title = 'Enter Your Login Credentials'
-
-
+    const navigate = useNavigate();
+    
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
@@ -22,8 +23,18 @@ const Login = () => {
                 http.post('/Account/login', credentials, {
                     signal: AbortSignal.timeout(100000),
                 }).then((response) => {
-                    console.log(response);
-                    localStorage.setItem('username', response.data.username); // assume info sent back is username
+                    // console.log(response);
+                    // should replace this with indexdb
+                    localStorage.setItem('email', response.data.email);
+                    localStorage.setItem('first_name', response.data.first_name);
+                    localStorage.setItem('img_type', response.data.img_type);
+                    localStorage.setItem('last_name', response.data.last_name);
+                    localStorage.setItem('macro_goal', response.data.macro_goal);
+                    localStorage.setItem('tdee', response.data.tdee);
+                    localStorage.setItem('username', response.data.username);
+                    localStorage.setItem('profile_picture', response.data.profile_picture);
+                    navigate('/dashboard');
+
                 }).catch(function (error) {
                     if (error.response) {
                         console.log(error.response.data);

@@ -5,8 +5,8 @@ namespace MacroPhager.Server.DTOs.Accounts
 {
     public class Login
     {
-        public string username;
+        public string username { get; set; }
 
-        public string password;
+        public string password { get; set; }
     }
 }
