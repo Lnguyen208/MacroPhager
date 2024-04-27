@@ -29,9 +29,11 @@ namespace MacroPhager.Server.Controllers
                 fat = newFood.fat,
                 carbohydrate = newFood.carbohydrate,
                 protein = newFood.protein,
+                created_by = newFood.username,
             };
 
             _macrophagercontext.Set<FoodItem>().Add(insertFood);
+            _macrophagercontext.SaveChanges();
             return Ok("food added");
         }
 

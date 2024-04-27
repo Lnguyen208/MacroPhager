@@ -20,5 +20,7 @@ namespace MacroPhager.Server.DTOs.Foods
         public float protein { get; set; }
 
         public string? food_id {  get; set; } // not needed outside of edit food items
+        public string username { get; set; }
     }
+
 }

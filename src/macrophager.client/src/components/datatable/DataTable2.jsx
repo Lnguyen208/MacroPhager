@@ -22,9 +22,8 @@ const DataTable = () => {
     /*    console.log(inputDate);*/
 
     useEffect(() => {
-        let date = [{ date: inputDate }];
         // fetch should return serving and serving SIZE with OG Data. Need a function to calculate adjusted macronutrient values
-            http.post('/foodlog/getLogByDate', date, {
+        http.post('/dailylog/getdailylog', { username: localStorage.getItem('username') }, {
                 signal: AbortSignal.timeout(10000),
             }).then((response) => {
                 console.log(response);
@@ -47,7 +46,7 @@ const DataTable = () => {
                 }
                 console.log(error.config);
             });
-        setIncomingData(foodRows);
+        //setIncomingData(foodRows);
 
     }, []);
 
@@ -143,7 +142,7 @@ const DataTable = () => {
                         },
                     }}
                 >
-                    <DialogTitle>Add a New Friend</DialogTitle>
+                    <DialogTitle>Edit Food Entry</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
                             Edit Food Entry

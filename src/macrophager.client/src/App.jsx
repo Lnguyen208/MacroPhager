@@ -14,6 +14,7 @@ import Meals from './pages/meals/Meals';
 import './styles/dark.scss';
 import { DarkModeContext } from './context/darkModeContext';
 import { useContext } from 'react';
+import FoodRepo from './pages/foodrepo/FoodRepo';
 
 function App() {
     const { darkMode } = useContext(DarkModeContext);
@@ -30,6 +31,7 @@ function App() {
                         <Route index element={<List type='Daily Log'></List>}></Route>
                         <Route path='new' element={<New2></New2>}></Route>
                         <Route path='meals' element={<Meals></Meals>}></Route>
+                        <Route path='foodrepo' element={<FoodRepo></FoodRepo> }></Route>
                     </Route>
                     <Route path='friends'>
                         <Route index element={<List type='Friends'></List>}></Route>

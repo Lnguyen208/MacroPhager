@@ -21,8 +21,8 @@ namespace MacroPhager.Server.Controllers
         public async Task<IActionResult> GetDailyLog(UserRequest username)
         {
             var today = new SqlParameter("today", DateOnly.FromDateTime(DateTime.Now));
-            var log_id = _macrophagercontext.Set<DailyLog>().FromSqlRaw($"SELECT * FROM [DailyLog] WHERE date = @today", today);
-            if (log_id.First() == null)
+            var log_id = _macrophagercontext.Set<DailyLog>().FromSqlRaw($"SELECT * FROM [DailyLogs] WHERE date = @today", today);
+            if (log_id.FirstOrDefault() == null)
             {
                 // Create a new Log
                 _macrophagercontext.Set<DailyLog>().Add( new DailyLog() {
@@ -35,26 +35,27 @@ namespace MacroPhager.Server.Controllers
             }
             // there is a log existing
             var log_id_param = new SqlParameter("log_id", log_id.First().log_id);
-            var logged_food_ids = _macrophagercontext.Set<LoggedFood>().FromSqlRaw($"SELECT * FROM [LoggedFood] WHERE log_id = @log_id", log_id_param).ToList();
+            var logged_food_ids = _macrophagercontext.Set<LoggedFood>().FromSqlRaw($"SELECT * FROM [LoggedFoods] WHERE log_id = @log_id", log_id_param).ToList();
             var today_food_summary = new List<FoodSummary>();
+            var counter = 0;
 
             logged_food_ids.ForEach((lf) =>
             {
                 var food = new SqlParameter("food_id", lf.food_id);
-                var standard_foods = _macrophagercontext.Set<FoodItem>().FromSqlRaw($"SELECT * FROM [FoodItem] WHERE [FoodItem].food_id = @food_id", food).ToList().First();
+                var standard_foods = _macrophagercontext.Set<FoodItem>().FromSqlRaw($"SELECT * FROM [FoodItems] WHERE [FoodItems].food_id = @food_id", food).ToList().First();
                 today_food_summary.Add(new FoodSummary()
                 {
-                    log_id = lf.log_id,
+                    id = counter,
                     logged_food_id = lf.logged_food_id,
-                    food_id = lf.food_id,
-                    food_name = standard_foods.food_description,
-                    serving_size = standard_foods.serving_size,
+                    foodname = standard_foods.food_description,
+                    serving = standard_foods.serving_size,
                     calories = standard_foods.calories,
-                    fat = standard_foods.fat,
-                    carbohydrate = standard_foods.carbohydrate,
+                    fats = standard_foods.fat,
+                    carbs = standard_foods.carbohydrate,
                     protein = standard_foods.protein,
                     logged_serving = lf.logged_serving,
                 });
+                counter++;
             });
 
             return Ok(today_food_summary);
