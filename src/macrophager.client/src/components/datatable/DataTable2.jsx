@@ -113,13 +113,13 @@ const DataTable = () => {
                             <div className='statsTitle'>Total Macronutrients</div>
                             <div className='macrodistr'>
                                 <div className='calories'>Calories: </div>
-                                <span>1000</span>
+                                <span>0</span>
                                 <div className='fats'>Fats: </div>
-                                <span>10</span>
+                                <span>0</span>
                                 <div className='carbs'>Carbs: </div>
-                                <span>40</span>
+                                <span>0</span>
                                 <div className='proteins'>Proteins:</div>
-                                <span>24</span>
+                                <span>0</span>
                             </div>
                         </div>
 

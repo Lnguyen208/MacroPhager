@@ -8,11 +8,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 const rows = [
-    { name: 'Frozen Yoghurt', calories: 159, fat: 6.0, carbs: 24, protein: 4.0, status: 'High'},
-    { name: 'Ice Cream', calories: 200, fat: 6.0, carbs: 24, protein: 4.0, status: 'Medium'},
-    { name: 'Frozen Custard', calories: 300, fat: 6.0, carbs: 24, protein: 4.0, status: 'Medium' },
-    { name: 'Soft Serve', calories: 100, fat: 6.0, carbs: 24, protein: 4.0, status: 'High' },
-    { name: 'Mochi', calories: 250, fat: 6.0, carbs: 24, protein: 4.0, status: 'Low'},
+    { name: 'Frozen Yoghurt', calories: 159, fat: 6.0, carbs: 24, protein: 10.0, status: 'High'},
+    { name: 'Ice Cream', calories: 200, fat: 6.0, carbs: 40, protein: 4.0, status: 'Medium'},
+    { name: 'Frozen Custard', calories: 300, fat: 8.0, carbs: 24, protein: 1.0, status: 'Medium' },
+    { name: 'Soft Serve', calories: 100, fat: 3.0, carbs: 30, protein: 4.0, status: 'High' },
+    { name: 'Mochi', calories: 250, fat: 11.0, carbs: 22, protein: 2.0, status: 'Low'},
 ];
 
 const TheTable = () => {
