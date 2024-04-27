@@ -69,5 +69,19 @@ namespace MacroPhager.Server.Controllers
             return Ok(query);        
         }
 
+        [HttpPost("searchFDC")]
+        public async Task<IActionResult> SearchFDC(FDCSearchRequest fdcsearchrequest)
+        {
+            var results = sharedClient.PostAsync("/v1/foods/search", fdcsearchrequest.search_term);
+            string resultContent = await results.Content.ReadAsStringAsync();
+            return Ok(resultContent);
+        }
+
+        // HttpClient lifecycle management best practices:
+        // https://learn.microsoft.com/dotnet/fundamentals/networking/http/httpclient-guidelines#recommended-use
+        private static HttpClient sharedClient = new()
+        {
+            BaseAddress = new Uri("https://api.nal.usda.gov/fdc"),
+        };
     }
 }

@@ -1,4 +1,3 @@
-
 import Sidebar from '../../components/sidebar/Sidebar';
 import './FoodRepo.scss';
 import Navbar from '../../components/navbar/Navbar';
@@ -84,7 +83,17 @@ const FoodRepo = () => {
         setOpen(false);
     };
 
+    const [searchResults, setSearchResults] = useState([]);
+
+    const handleSearch = () => {
+        var searchterm = document.getElementById('search_term').innerText;
+        http.post('searchFDC', { search_term: searchterm, username: localStorage.getItem('username') }).then((response) => {
+            setSearchResults(response);
+        });
+    };
+
     const [incomingData, setIncomingData] = useState([]);
+
     useEffect(() => {
         http.post('Food/myfoodrepo', { username: localStorage.getItem('username') }).then((response) => { setIncomingData(response.data); })
 
@@ -128,13 +137,16 @@ const FoodRepo = () => {
                                 autoFocus
                                 required
                                 margin="dense"
-                                id="name"
+                                id="search_term"
                                 name="food_query"
                                 label="Food Query"
                                 type="food_query"
-                                
                                 variant="standard"
-                                style={{ position: 'absolute', left: '20px', top: '40px' }}></TextField>
+                                style={{ position: 'absolute', left: '20px', top: '40px' }}>
+                            </TextField>
+                            <Button autoFocus color="inherit" onClick={ handleSearch }>
+                                Search
+                            </Button>
                             <IconButton
                                 edge="start"
                                 color="inherit"
@@ -152,7 +164,7 @@ const FoodRepo = () => {
                         </Toolbar>
                     </AppBar>
                     <div style={{ display: 'grid', backgroundColor: 'lavender', height: '100%', width: '100%' }}>
-
+                        {searchResults} 
                     </div>
                 </Dialog>
             </div>
