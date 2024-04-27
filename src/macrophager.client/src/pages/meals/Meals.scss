@@ -1,0 +1,141 @@
+
+.Meals {
+    display: flex;
+    color: darkgray;
+
+    .mealsContainer {
+        flex: 6;
+
+        .top {
+            display: flex;
+            min-height: 100vh;
+
+            .left {
+                flex: 3;
+
+                .mealCards {
+                    display: flex;
+                    justify-content: space-evenly;
+                    flex-wrap: wrap;
+
+                    .mealCard {
+                        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+                        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+                        margin-top: 10px;
+                        margin-right: 10px;
+                        margin-left: 10px;
+                        min-height: 300px;
+                        min-width: 300px;
+                        max-width: 300px;
+                        border-radius: 5px;
+
+                        .mealCardTop {
+                            display: flex;
+                            justify-content: space-between;
+                            margin-left: 20px;
+                            margin-bottom: -10px;
+                        }
+
+
+                        .mealCardTitle {
+                            margin-top: 20px;
+                            font-weight: bold;
+                            font-size: 20px;
+                            margin-bottom: -10px;
+                            overflow: hidden;
+                            max-width: 180px;
+                        }
+
+                        .editButton {
+                            padding: 10px 15px 10px 15px;
+                            background-color: #7551f818;
+                            font-size: 15px;
+                            font-weight: 300;
+                            color: #7451f8;
+                            cursor: pointer;
+                            border-top-right-radius: 5px 5px;
+                        }
+
+                        .addButton {
+                            padding: 10px 0px 10px 0px;
+                            background-color: #8060FB;
+                            font-size: 15px;
+                            font-weight: 300;
+                            margin-top: 10px;
+                            color: white;
+                            cursor: pointer;
+                            text-align: center;
+                            border-bottom-left-radius: 5px 5px;
+                            border-bottom-right-radius: 5px 5px;
+                        }
+                    }
+                }
+            }
+
+            .right {
+                border-left: solid 2px #3333;
+                flex: 1;
+                min-width: 365px;
+                max-width: 480px;
+
+                .mealDetailTop {
+                    display: grid;
+                    padding-left: 20px;
+                    padding-bottom: 5px;
+                    border-bottom: 1px solid darkgray;
+
+                    .mealTitle {
+                        font-size: 20px;
+                        font-weight: bold;
+                        margin-top: 15px;
+                        color: darkgray;
+                        overflow: hidden;
+                    }
+
+                    .detailTitle {
+                        font-size: 18px;
+                        font-weight: bold;
+                        color: gray;
+                    }
+                }
+
+                .center {
+                    padding-left: 10px;
+
+                    ul {
+                        list-style: none;
+                        padding: 0;
+                        margin: 0;
+                        margin-left: -10px;
+
+                        li {
+                            display: flex;
+                            align-items: center;
+                            padding: 20px;
+                            cursor: pointer;
+                            justify-content: space-between;
+                            overflow: hidden;
+
+                            &:hover {
+                                background-color: #ece8ff;
+                            }
+
+                            .icon {
+                                font-size: 25px;
+                                color: #7451f8;
+                                right: 1px;
+                            }
+
+                            span {
+                                font-size: 20px;
+                                font-weight: 600;
+                                color: gray;
+                                margin-left: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

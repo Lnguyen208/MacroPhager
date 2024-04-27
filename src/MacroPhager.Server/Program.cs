@@ -1,3 +1,6 @@
+using MacroPhager.Server;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<MacroPhagerContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MacroPhagerDB")));
+
 var app = builder.Build();
+app.UseCors(x => x
+.AllowAnyOrigin()
+.AllowAnyMethod()
+.AllowAnyHeader());
 
 app.UseDefaultFiles();
 app.UseStaticFiles();

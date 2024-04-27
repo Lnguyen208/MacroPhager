@@ -1,0 +1,52 @@
+
+
+.PublicNavbar {
+    height: 50px;
+    border-bottom: 0.5px solid rgb(231, 228, 228);
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+    z-index: 2;
+    background-color: white;
+
+    .wrapper {
+        width: 100%;
+        padding: 20px 0px 20px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+            color: #7451f8;
+            padding: 0px 8px 0px 8px;
+        }
+
+        .items {
+            display: flex;
+            align-items: center;
+
+            .item {
+                display: flex;
+                align-items: center;
+                margin-right: 20px;
+                position: relative;
+                cursor: pointer;
+
+                .icon {
+                    font-size: 20px;
+                }
+
+                .loginbutton {
+                    background-color: #7451f8;
+                    padding: 10px 20px 10px 20px;
+                    color: snow;
+                    margin-right: -10px;
+                    border-radius: 5px;
+                }
+            }
+        }
+    }
+}

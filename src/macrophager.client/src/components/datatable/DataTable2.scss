@@ -1,0 +1,158 @@
+.DataTable {
+    padding: 20px;
+    display: grid;
+
+    .bottom {
+        display: flex;
+        justify-content: flex-start;
+
+        .stats {
+            margin-top: 10px;
+            padding: 5px 0px 20px 0px;
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            border-radius: 5px;
+            max-width: 420px;
+            min-width: 420px;
+
+            .statsTitle {
+                margin-top: 10px;
+                margin-left: 20px;
+                font-size: 18px;
+                color: gray;
+            }
+
+            .macrodistr {
+                margin-top: 15px;
+                margin-left: 20px;
+                display: flex;
+                justify-content: flex-start;
+                gap: 10px;
+                font-size: 16px;
+
+                span {
+                    color: #444444;
+                }
+
+                .calories {
+                    font-weight: bold;
+                    color: #444444;
+                }
+
+                .fats {
+                    font-weight: bold;
+                    color: #5F42CC;
+                }
+
+                .carbs {
+                    font-weight: bold;
+                    color: #37B874;
+                }
+
+                .proteins {
+                    font-weight: bold;
+                    color: #1D73C1;
+                }
+            }
+        }
+    }
+
+    .DataTableTitle {
+        width: 100%;
+        font-size: 24px;
+        color: gray;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .buttonarea {
+            display: flex;
+            gap: 10px;
+
+            .logfoodbutton {
+                color: #5F42CC;
+                font-size: 16px;
+                font-weight: 400;
+                border: 1px solid #5F42CC;
+                padding: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+                text-align: center;
+            }
+
+            .link {
+                text-decoration: none;
+                color: green;
+                font-size: 16px;
+                font-weight: 400;
+                border: 1px solid green;
+                padding: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+                text-align: center;
+            }
+
+            .newFriendButton {
+                color: green;
+                font-size: 16px;
+                font-weight: 400;
+                border: 1px solid green;
+                padding: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .cellwithimage {
+        display: flex;
+        align-items: center;
+
+        .cellimage {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+    }
+
+    .cellwithstatus {
+        padding: 5px;
+        border-radius: 5px;
+        display: inline;
+
+        &.Active {
+            color: #37B874;
+            border: solid 1px;
+        }
+
+        &.Pending {
+            color: #1D73C1;
+            border: solid 1px;
+        }
+
+        &.Inactive {
+            color: #5F42CC;
+            border: solid 1px;
+        }
+    }
+
+    .cellAction {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        .viewButton {
+            color: darkblue;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .deleteButton {
+            color: crimson;
+            cursor: pointer;
+        }
+    }
+}

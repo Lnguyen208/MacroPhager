@@ -28,9 +28,4 @@
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\Users\" />
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
 </Project>
